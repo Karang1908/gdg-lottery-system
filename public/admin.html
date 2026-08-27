@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Lottery admin - GDG BITS Pilani Dubai Campus</title>
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/GoogleSans.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/GoogleSansText-400.woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css" />
+    <script>
+      (function () {
+        try {
+          var s = localStorage.getItem('gdg-theme') === 'dark' ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', s);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <!--
+      THESIS: The operator console for the same Google surface as the entrant
+      page. The wheel owns the room; every control is calm, legible equipment
+      arranged around it. It refuses casino ornament and dashboard-tile clutter.
+      OWN-WORLD: Google Sans + Google Sans Text, Google's neutral ramp, one blue
+      action colour, the brand four reserved for wheel slices and roster
+      swatches. 2px borders, pill controls, Google elevation shadows.
+      STORY: The host unlocks, watches the roster fill, schedules the draw, and
+      presses one large button. The server commits the winner first; the wheel
+      then reveals what has already been decided.
+      INTERACTION: One authored motion moment — the spin. Destructive actions
+      are confirmed and visually subordinate to the draw.
+    -->
+
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-sun" viewBox="0 0 24 24">
+          <path d="M12 17q-2.075 0-3.537-1.463Q7 14.075 7 12t1.463-3.538Q9.925 7 12 7t3.538 1.462Q17 9.925 17 12q0 2.075-1.462 3.537Q14.075 17 12 17ZM2 13q-.425 0-.712-.288Q1 12.425 1 12t.288-.713Q1.575 11 2 11h2q.425 0 .713.287Q5 11.575 5 12t-.287.712Q4.425 13 4 13Zm18 0q-.425 0-.712-.288Q19 12.425 19 12t.288-.713Q19.575 11 20 11h2q.425 0 .712.287.288.288.288.713t-.288.712Q22.425 13 22 13Zm-8-8q-.425 0-.712-.288Q11 4.425 11 4V2q0-.425.288-.713Q11.575 1 12 1t.713.287Q13 1.575 13 2v2q0 .425-.287.712Q12.425 5 12 5Zm0 18q-.425 0-.712-.288Q11 22.425 11 22v-2q0-.425.288-.712Q11.575 19 12 19t.713.288Q13 19.575 13 20v2q0 .425-.287.712Q12.425 23 12 23ZM5.65 7.05 4.575 6q-.3-.275-.288-.7.013-.425.288-.725.3-.3.725-.3t.7.3L7.05 5.65q.275.3.275.7 0 .4-.275.7-.275.3-.687.287-.413-.012-.713-.287ZM18 19.425l-1.05-1.075q-.275-.3-.275-.712 0-.413.275-.688.275-.3.688-.287.412.012.712.287L19.425 18q.3.275.288.7-.013.425-.288.725-.3.3-.725.3t-.7-.3ZM16.95 7.05q-.3-.275-.287-.688.012-.412.287-.712L18 4.575q.275-.3.7-.288.425.013.725.288.3.3.3.725t-.3.7L18.35 7.05q-.3.275-.7.275-.4 0-.7-.275ZM4.575 19.425q-.3-.3-.3-.725t.3-.7l1.075-1.05q.3-.275.712-.275.413 0 .688.275.3.275.287.688-.012.412-.287.712L6 19.425q-.275.3-.7.287-.425-.012-.725-.287Z"/>
+        </symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24">
+          <path d="M12 21q-3.75 0-6.375-2.625T3 12q0-3.75 2.625-6.375T12 3q.35 0 .688.025.337.025.662.075-1.025.725-1.638 1.887Q11.1 6.15 11.1 7.5q0 2.25 1.575 3.825Q14.25 12.9 16.5 12.9q1.375 0 2.525-.613 1.15-.612 1.85-1.637.05.325.075.662Q21 11.65 21 12q0 3.75-2.625 6.375T12 21Z"/>
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <path d="M6 22q-.825 0-1.412-.587Q4 20.825 4 20V10q0-.825.588-1.412Q5.175 8 6 8h1V6q0-2.075 1.463-3.538Q9.925 1 12 1t3.538 1.462Q17 3.925 17 6v2h1q.825 0 1.413.588Q20 9.175 20 10v10q0 .825-.587 1.413Q18.825 22 18 22Zm6-5q.825 0 1.413-.587Q14 15.825 14 15q0-.825-.587-1.413Q12.825 13 12 13q-.825 0-1.412.587Q10 14.175 10 15q0 .825.588 1.413Q11.175 17 12 17ZM9 8h6V6q0-1.25-.875-2.125T12 3q-1.25 0-2.125.875T9 6Z"/>
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24">
+          <path d="M19.6 21 13.3 14.7q-.75.6-1.725.95Q10.6 16 9.5 16q-2.725 0-4.612-1.887Q3 12.225 3 9.5q0-2.725 1.888-4.613Q6.775 3 9.5 3t4.613 1.887Q16 6.775 16 9.5q0 1.1-.35 2.075-.35.975-.95 1.725L21 19.6ZM9.5 14q1.875 0 3.188-1.312Q14 11.375 14 9.5q0-1.875-1.312-3.188Q11.375 5 9.5 5 7.625 5 6.312 6.312 5 7.625 5 9.5q0 1.875 1.312 3.188Q7.625 14 9.5 14Z"/>
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+          <path d="M6.4 19 5 17.6l5.6-5.6L5 6.4 6.4 5l5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6Z"/>
+        </symbol>
+        <symbol id="i-calendar" viewBox="0 0 24 24">
+          <path d="M5 22q-.825 0-1.412-.587Q3 20.825 3 20V6q0-.825.588-1.412Q4.175 4 5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588Q21 5.175 21 6v14q0 .825-.587 1.413Q19.825 22 19 22Zm0-2h14V10H5v10Z"/>
+        </symbol>
+        <symbol id="i-arrow-right" viewBox="0 0 24 24">
+          <path d="m14 18-1.4-1.45L16.15 13H4v-2h12.15L12.6 7.45 14 6l6 6Z"/>
+        </symbol>
+        <symbol id="i-undo" viewBox="0 0 24 24">
+          <path d="M7 19v-2h7.1q1.575 0 2.738-1.012Q18 14.975 18 13.5q0-1.475-1.162-2.487Q15.675 10 14.1 10H7.8l2.6 2.6L9 14 4 9l5-5 1.4 1.4L7.8 8h6.3q2.425 0 4.163 1.575Q20 11.15 20 13.5q0 2.35-1.737 3.925Q16.525 19 14.1 19Z"/>
+        </symbol>
+        <symbol id="i-delete" viewBox="0 0 24 24">
+          <path d="M7 21q-.825 0-1.412-.587Q5 19.825 5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413Q17.825 21 17 21ZM17 6H7v13h10ZM9 17h2V8H9Zm4 0h2V8h-2Z"/>
+        </symbol>
+      </defs>
+    </svg>
+
+    <header class="appbar">
+      <a class="brand" href="/">
+        <img class="logo-light" src="/assets/gdg-logo-light.png" alt="Google Developer Group, BITS Pilani Dubai Campus" />
+        <img class="logo-dark" src="/assets/gdg-logo-dark.png" alt="" aria-hidden="true" />
+      </a>
+      <div class="appbar-actions">
+        <span class="chip chip-admin">Lottery admin</span>
+        <button class="icon-btn" id="theme-toggle" type="button" aria-pressed="false">
+          <svg class="icon icon-sun hidden" aria-hidden="true"><use href="#i-sun" /></svg>
+          <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="admin-lock" id="admin-lock">
+      <section class="lock-card card" aria-labelledby="lock-title">
+        <div class="lock-badge" aria-hidden="true"><svg class="icon"><use href="#i-lock" /></svg></div>
+        <h2 id="lock-title">Unlock the draw</h2>
+        <p class="lede">Enter the admin password configured for this deployment.</p>
+        <form id="login-form" novalidate>
+          <div class="field">
+            <input id="password-input" type="password" autocomplete="current-password" placeholder=" " required />
+            <label for="password-input">Admin password</label>
+          </div>
+          <p class="msg-error hidden" id="login-error" role="alert"></p>
+          <button class="btn btn-filled btn-lg btn-block" id="login-button" type="submit">Unlock console</button>
+        </form>
+      </section>
+    </main>
+
+    <main class="admin-layout hidden" id="admin-console">
+      <nav class="mobile-console-nav" aria-label="Admin console sections">
+        <a href="#draw-title">Draw</a>
+        <a href="#schedule-title">Schedule</a>
+        <a href="#roster-title">Entrants</a>
+      </nav>
+      <section class="draw-column" aria-labelledby="draw-title">
+        <div class="admin-countdown">
+          <span>Next lottery in</span>
+          <strong id="admin-countdown">Not scheduled</strong>
+        </div>
+        <div class="draw-heading">
+          <div>
+            <h1 id="draw-title">The draw floor</h1>
+            <p><strong id="admin-total">0</strong> entries · <strong id="admin-eligible">0</strong> eligible</p>
+          </div>
+          <span class="chip chip-live" id="sync-state"><span aria-hidden="true"></span>Live</span>
+        </div>
+
+        <div class="wheel-frame admin-wheel-frame">
+          <div class="wheel-pointer" aria-hidden="true">
+            <svg viewBox="0 0 48 42"><path d="M24 42 2 4C1.2 2.2 2.5 0 4.5 0h39c2 0 3.3 2.2 2.3 4L24 42Z" /></svg>
+          </div>
+          <canvas id="wheel" width="1000" height="1000" role="img" aria-label="The lottery wheel is waiting for entrants."></canvas>
+          <div class="wheel-empty" id="wheel-empty">
+            <img src="/assets/gdg-mark.png" alt="" />
+            <strong>No entries yet</strong>
+            <span>Share the main page to fill the wheel.</span>
+          </div>
+          <div class="wheel-tooltip hidden" id="wheel-tooltip" role="status"></div>
+        </div>
+
+        <div class="winner-stage" id="winner-stage" aria-live="assertive">
+          <div class="winner-empty" id="winner-empty">
+            <span>The result will appear here</span>
+            <strong>Ready when you are.</strong>
+          </div>
+          <div class="winner-result hidden" id="winner-result">
+            <span>Selected winner</span>
+            <strong id="winner-name"></strong>
+          </div>
+        </div>
+
+        <p class="msg-error action-error hidden" id="action-error" role="alert"></p>
+        <div class="draw-controls">
+          <button class="btn btn-filled btn-lg btn-draw" id="draw-button" type="button">Draw a winner</button>
+          <button class="btn btn-outlined hidden" id="advance-button" type="button">Next draw <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-right" /></svg></button>
+          <button class="btn btn-text hidden" id="return-button" type="button"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-undo" /></svg>Return to wheel</button>
+        </div>
+      </section>
+
+      <aside class="operator-rail" aria-label="Lottery controls">
+        <section class="rail-section countdown-controls" aria-labelledby="schedule-title">
+          <div class="rail-heading">
+            <div>
+              <h2 id="schedule-title">Schedule the next draw</h2>
+              <p>Synced across every open page.</p>
+            </div>
+            <svg class="icon" aria-hidden="true"><use href="#i-calendar" /></svg>
+          </div>
+          <form id="countdown-form">
+            <label class="field-label" for="countdown-input">Date and time</label>
+            <div class="inline-field">
+              <input id="countdown-input" type="datetime-local" required />
+              <button class="btn btn-outlined" type="submit">Set</button>
+            </div>
+          </form>
+          <div class="quick-times" aria-label="Quick countdown options">
+            <button type="button" data-minutes="5">5 min</button>
+            <button type="button" data-minutes="10">10 min</button>
+            <button type="button" data-minutes="30">30 min</button>
+            <button type="button" data-minutes="60">1 hour</button>
+          </div>
+          <button class="btn btn-text countdown-cancel" id="cancel-countdown" type="button">Cancel countdown</button>
+        </section>
+
+        <section class="rail-section roster-section" aria-labelledby="roster-title">
+          <div class="rail-heading">
+            <div>
+              <h2 id="roster-title">Entrants</h2>
+              <p>Emails stay on this admin screen.</p>
+            </div>
+            <span class="chip" id="roster-count">0</span>
+          </div>
+          <label class="search-field" for="roster-search">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-search" /></svg>
+            <input id="roster-search" type="search" placeholder="Search name or email" autocomplete="off" />
+          </label>
+          <div class="roster-scroll">
+            <ul class="admin-roster" id="admin-roster"></ul>
+            <p class="roster-empty" id="roster-empty">No one has joined yet.</p>
+          </div>
+        </section>
+
+        <section class="rail-section history-section" aria-labelledby="history-title">
+          <div class="rail-heading">
+            <div><h2 id="history-title">Recent winners</h2><p>Newest first.</p></div>
+          </div>
+          <ol class="history-list" id="history-list"></ol>
+          <p class="roster-empty" id="history-empty">No winners drawn yet.</p>
+        </section>
+
+        <section class="rail-section danger-section" aria-labelledby="manage-title">
+          <div class="rail-heading"><div><h2 id="manage-title">Manage round</h2><p>These actions affect everyone.</p></div></div>
+          <div class="manage-actions">
+            <button class="btn btn-outlined" id="reset-pool" type="button">Make everyone eligible</button>
+            <button class="btn btn-danger" id="reset-all" type="button"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-delete" /></svg>Clear every entry</button>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <span><span class="footer-long">Google Developer Group · </span>BITS Pilani Dubai Campus</span>
+      <span class="footer-dots"><i></i><i></i><i></i><i></i></span>
+    </footer>
+
+    <div class="toast hidden" id="toast" role="status"></div>
+
+    <script src="/wheel.js"></script>
+    <script src="/theme.js"></script>
+    <script src="/admin.js"></script>
+  </body>
+</html>

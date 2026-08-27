@@ -1,0 +1,8 @@
+node_modules/
+state.json
+.lottery-state.json
+.vercel
+*.log
+.DS_Store
+.env
+dist/
