@@ -208,6 +208,9 @@
       lock.classList.add('hidden');
       consolePanel.classList.remove('hidden');
       render(next);
+      try {
+        if (sessionStorage.getItem(PRESENT_KEY) === '1') setPresenting(true);
+      } catch (_) {}
       syncState.classList.remove('is-offline');
       syncState.lastChild.textContent = 'Live';
     } catch (error) {
@@ -305,6 +308,34 @@
     runAndRender('return', 'The winner is eligible again.')
   );
   searchInput.addEventListener('input', renderRoster);
+
+  /* Presentation mode. The console doubles as the screen the room watches, so
+     the operator's half — roster, emails, schedule, reset controls — is hidden
+     behind one toggle. Kept in sessionStorage so an accidental refresh in front
+     of the room comes back presenting rather than exposing the entrant list. */
+  const PRESENT_KEY = 'gdg-lottery-presenting';
+
+  function setPresenting(on) {
+    document.body.classList.toggle('is-presenting', on);
+    try {
+      if (on) sessionStorage.setItem(PRESENT_KEY, '1');
+      else sessionStorage.removeItem(PRESENT_KEY);
+    } catch (_) {
+      // A blocked storage API must not stop the toggle itself working.
+    }
+  }
+
+  document
+    .getElementById('present-button')
+    .addEventListener('click', () => setPresenting(true));
+  document
+    .getElementById('present-exit')
+    .addEventListener('click', () => setPresenting(false));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && document.body.classList.contains('is-presenting')) {
+      setPresenting(false);
+    }
+  });
 
   document.getElementById('countdown-form').addEventListener('submit', (event) => {
     event.preventDefault();

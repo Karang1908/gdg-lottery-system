@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Lottery admin - GDG BITS Pilani Dubai Campus</title>
+    <title>Admin · Giveaway | Google Developer Group on Campus, BITS Pilani Dubai Campus</title>
     <link rel="icon" type="image/png" href="/assets/favicon.png" />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/GoogleSans.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/GoogleSansText-400.woff2" crossorigin />
@@ -60,6 +60,12 @@
         <symbol id="i-undo" viewBox="0 0 24 24">
           <path d="M7 19v-2h7.1q1.575 0 2.738-1.012Q18 14.975 18 13.5q0-1.475-1.162-2.487Q15.675 10 14.1 10H7.8l2.6 2.6L9 14 4 9l5-5 1.4 1.4L7.8 8h6.3q2.425 0 4.163 1.575Q20 11.15 20 13.5q0 2.35-1.737 3.925Q16.525 19 14.1 19Z"/>
         </symbol>
+        <symbol id="i-present" viewBox="0 0 24 24">
+          <path d="M2 4h20v2H2Zm2 4h16v9q0 .825-.587 1.413Q18.825 19 18 19h-3.2l2.6 3H15l-2.4-3h-1.2L9 22H6.6l2.6-3H6q-.825 0-1.413-.587Q4 17.825 4 17Z"/>
+        </symbol>
+        <symbol id="i-close-big" viewBox="0 0 24 24">
+          <path d="M6.4 19 5 17.6l5.6-5.6L5 6.4 6.4 5l5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6Z"/>
+        </symbol>
         <symbol id="i-delete" viewBox="0 0 24 24">
           <path d="M7 21q-.825 0-1.412-.587Q5 19.825 5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413Q17.825 21 17 21ZM17 6H7v13h10ZM9 17h2V8H9Zm4 0h2V8h-2Z"/>
         </symbol>
@@ -72,7 +78,11 @@
         <img class="logo-dark" src="/assets/gdg-logo-dark.png" alt="" aria-hidden="true" />
       </a>
       <div class="appbar-actions">
-        <span class="chip chip-admin">Lottery admin</span>
+        <span class="chip chip-admin">Giveaway admin</span>
+        <button class="btn btn-outlined btn-present" id="present-button" type="button">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="#i-present" /></svg>
+          Present
+        </button>
         <button class="icon-btn" id="theme-toggle" type="button" aria-pressed="false">
           <svg class="icon icon-sun hidden" aria-hidden="true"><use href="#i-sun" /></svg>
           <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon" /></svg>
@@ -212,6 +222,10 @@
       <span><span class="footer-long">Google Developer Group · </span>BITS Pilani Dubai Campus</span>
       <span class="footer-dots"><i></i><i></i><i></i><i></i></span>
     </footer>
+
+    <button class="present-exit" id="present-exit" type="button" aria-label="Exit presentation mode">
+      <svg class="icon" aria-hidden="true"><use href="#i-close-big" /></svg>
+    </button>
 
     <div class="toast hidden" id="toast" role="status"></div>
 

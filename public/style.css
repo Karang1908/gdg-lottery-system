@@ -1376,6 +1376,144 @@ p {
 }
 
 /* ==========================================================================
+   Presentation mode
+   The console stripped to what a room needs to see: the wheel, the result and
+   the one control that advances the draw. Everything the operator uses to
+   prepare — the roster, the schedule, the reset controls, the entrants' emails
+   — is hidden, because this view is on a projector or a shared screen.
+   ========================================================================== */
+
+.btn-present {
+  height: 40px;
+  padding: 0 18px;
+  font-size: 0.9375rem;
+}
+
+.present-exit {
+  display: none;
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 80;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  place-items: center;
+  background: var(--surface-2);
+  border: 2px solid var(--border);
+  color: var(--text-2);
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease),
+    opacity 0.2s var(--ease);
+  opacity: 0.35;
+}
+
+.present-exit:hover,
+.present-exit:focus-visible {
+  opacity: 1;
+  background: var(--surface-3);
+  color: var(--text);
+}
+
+body.is-presenting .present-exit {
+  display: grid;
+}
+
+/* Everything that is operator-only disappears. */
+body.is-presenting .appbar,
+body.is-presenting .footer,
+body.is-presenting .operator-rail,
+body.is-presenting .mobile-console-nav,
+body.is-presenting .admin-countdown,
+body.is-presenting #draw-title,
+body.is-presenting .chip-live {
+  display: none !important;
+}
+
+body.is-presenting .admin-layout {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: none;
+  height: 100dvh;
+}
+
+body.is-presenting .draw-column {
+  border-right: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  justify-items: center;
+  gap: clamp(8px, 1.4vh, 20px);
+  padding: clamp(16px, 3vh, 40px) clamp(20px, 4vw, 56px);
+  min-height: 0;
+}
+
+body.is-presenting .draw-heading {
+  margin-bottom: 0;
+  justify-content: center;
+}
+
+/* The entry count is the only stat the room benefits from. */
+body.is-presenting .draw-heading p {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.375rem);
+  color: var(--text-2);
+}
+
+body.is-presenting .draw-heading strong {
+  color: var(--text);
+}
+
+/* The wheel takes every pixel the other rows do not need. */
+body.is-presenting .admin-wheel-frame {
+  width: min(100%, 62vh);
+  max-height: 100%;
+}
+
+body.is-presenting .winner-stage {
+  width: min(100%, 900px);
+  border-width: 3px;
+}
+
+body.is-presenting .winner-stage strong {
+  font-size: clamp(2rem, 7vw, 5rem);
+}
+
+body.is-presenting .winner-result strong {
+  color: var(--accent);
+}
+
+body.is-presenting .winner-stage > div > span {
+  font-size: clamp(0.75rem, 1.2vw, 0.9375rem);
+}
+
+/* Controls stay put but grow to projector scale. */
+body.is-presenting .draw-controls {
+  position: static;
+  padding-block: 0;
+  width: 100%;
+}
+
+body.is-presenting .draw-controls .btn {
+  height: 64px;
+  padding: 0 40px;
+  font-size: 1.25rem;
+}
+
+body.is-presenting .btn-draw {
+  min-width: min(24rem, 100%);
+}
+
+@media (max-width: 620px) {
+  .btn-present {
+    padding: 0 14px;
+  }
+  body.is-presenting .draw-controls {
+    position: static;
+    margin: 0;
+    border-top: 0;
+    background: none;
+  }
+}
+
+/* ==========================================================================
    Responsive
    ========================================================================== */
 
