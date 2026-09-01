@@ -286,7 +286,7 @@
   }
 
   async function removeEntry(entry) {
-    if (!confirm(`Remove ${entry.name} from this lottery?`)) return;
+    if (!confirm(`Remove ${entry.name} from this giveaway?`)) return;
     await runAndRender('remove', `${entry.name} was removed.`, { entryId: entry.id });
   }
 
@@ -374,7 +374,7 @@
       )
     )
       return;
-    runAndRender('resetAll', 'The lottery has been cleared.');
+    runAndRender('resetAll', 'The giveaway has been cleared.');
   });
 
   const initialPassword = sessionStorage.getItem(PASSWORD_KEY);

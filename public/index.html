@@ -65,7 +65,7 @@
         <img class="logo-dark" src="/assets/gdg-logo-dark.png" alt="" aria-hidden="true" />
       </a>
       <div class="appbar-actions">
-        <span class="chip chip-live"><span aria-hidden="true"></span>Live lottery</span>
+        <span class="chip chip-live"><span aria-hidden="true"></span>Live giveaway</span>
         <button class="icon-btn" id="theme-toggle" type="button" aria-pressed="false">
           <svg class="icon icon-sun hidden" aria-hidden="true"><use href="#i-sun" /></svg>
           <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon" /></svg>
@@ -76,7 +76,7 @@
     <main class="entrant-layout">
       <section class="join-column" aria-labelledby="join-title">
         <div class="event-countdown" aria-live="polite">
-          <span>Next lottery in</span>
+          <span>Next giveaway in</span>
           <strong id="countdown">Not scheduled</strong>
         </div>
 
@@ -84,7 +84,7 @@
           <h1 id="join-title">Your name.<br />One fair <span class="accent-word">chance</span>.</h1>
           <p class="lede">
             Add yourself to the live draw in a few seconds. Once you're in, your
-            entry stays on the wheel — even if you close this tab.
+            entry stays in the draw — even if you close this tab.
           </p>
 
           <form id="join-form" novalidate>
@@ -118,7 +118,7 @@
             </div>
             <p class="msg-error hidden" id="join-error" role="alert"></p>
             <button class="btn btn-filled btn-lg btn-block" id="join-button" type="submit" style="margin-top: 20px">
-              Join the wheel
+              Join the giveaway
             </button>
           </form>
         </div>
@@ -127,7 +127,7 @@
           <div class="success-mark" aria-hidden="true">
             <svg class="icon"><use href="#i-check" /></svg>
           </div>
-          <h1>You're on the wheel, <span id="confirmed-name"></span>.</h1>
+          <h1>You're in, <span id="confirmed-name"></span>.</h1>
           <p class="lede">
             Your entry is saved on the server. You can safely leave or close this
             tab — your name will stay in the draw.
@@ -147,7 +147,7 @@
     </footer>
 
     <div class="conn-banner hidden" id="connection-banner" role="status">
-      Reconnecting to the live lottery…
+      Reconnecting to the live giveaway…
     </div>
 
     <script src="/theme.js"></script>

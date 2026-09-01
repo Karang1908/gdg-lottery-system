@@ -157,7 +157,7 @@
       showError(error.message);
     } finally {
       joinButton.disabled = false;
-      joinButton.textContent = 'Join the wheel';
+      joinButton.textContent = 'Join the giveaway';
     }
   });
 
