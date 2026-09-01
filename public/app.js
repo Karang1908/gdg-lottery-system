@@ -11,13 +11,6 @@
   const joinError = document.getElementById('join-error');
   const connectionBanner = document.getElementById('connection-banner');
   const countdown = document.getElementById('countdown');
-  const nameList = document.getElementById('public-name-list');
-  const publicWinner = document.getElementById('public-winner');
-  const wheel = new window.LotteryWheel({
-    canvas: document.getElementById('wheel'),
-    empty: document.getElementById('wheel-empty'),
-    tooltip: document.getElementById('wheel-tooltip'),
-  });
 
   let state = null;
   let receipt = readReceipt();
@@ -80,35 +73,12 @@
     return payload;
   }
 
+  /* Entrants are told one thing: that they are in. The roster, the wheel and
+     the winner live on the admin console, and the public API no longer sends
+     the entrant list at all, so no other person's name reaches this page. */
   function render(next) {
     state = next;
-    wheel.setEntries(next.entries);
-    document.getElementById('entrant-count').textContent = String(next.totalCount);
-    document.getElementById('eligible-count').textContent = String(next.eligibleCount);
-
-    publicWinner.classList.toggle('hidden', !next.winner);
-    if (next.winner) {
-      document.getElementById('public-winner-name').textContent = next.winner.name;
-    }
-
-    const fragment = document.createDocumentFragment();
-    next.entries.forEach((entry) => {
-      const item = document.createElement('li');
-      item.textContent = entry.name;
-      item.classList.toggle('is-selected', entry.selected);
-      fragment.appendChild(item);
-    });
-    nameList.replaceChildren(fragment);
-
-    if (receipt) {
-      const existing = next.entries.find((entry) => entry.id === receipt.id);
-      if (existing) {
-        setConfirmed({ id: existing.id, name: existing.name }, receipt.duplicate);
-      } else {
-        clearReceipt();
-        setJoinVisible();
-      }
-    }
+    if (receipt) setConfirmed(receipt, receipt.duplicate);
     updateCountdown();
   }
 

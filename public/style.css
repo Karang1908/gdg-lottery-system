@@ -587,20 +587,20 @@ p {
    Entrant page
    ========================================================================== */
 
+/* One column: the entrant page carries the join form and nothing else. The
+   wheel, the roster and the winner belong to the admin console. */
 .entrant-layout {
   display: grid;
-  width: min(1500px, 100%);
+  width: min(680px, 100%);
   margin: 0 auto;
-  grid-template-columns: minmax(340px, 0.82fr) minmax(480px, 1.18fr);
-  align-items: stretch;
+  align-items: center;
 }
 
 .join-column {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(28px, 3.4vw, 56px) clamp(20px, 4.4vw, 64px);
-  border-right: 2px solid var(--border);
+  padding: clamp(28px, 5vh, 64px) clamp(20px, 5vw, 40px);
 }
 
 .join-column form {
@@ -1391,7 +1391,6 @@ p {
     display: block;
   }
 
-  .join-column,
   .draw-column {
     border-right: 0;
     border-bottom: 2px solid var(--border);

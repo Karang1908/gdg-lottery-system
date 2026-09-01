@@ -139,44 +139,6 @@
         </section>
       </section>
 
-      <section class="public-wheel-column" aria-labelledby="live-draw-title">
-        <div class="section-heading">
-          <div>
-            <h2 id="live-draw-title">Live draw</h2>
-            <p><strong id="entrant-count">0</strong> people on the wheel</p>
-          </div>
-          <span class="chip"><strong id="eligible-count">0</strong>eligible</span>
-        </div>
-
-        <div class="wheel-frame public-wheel-frame">
-          <div class="wheel-pointer" aria-hidden="true">
-            <svg viewBox="0 0 48 42"><path d="M24 42 2 4C1.2 2.2 2.5 0 4.5 0h39c2 0 3.3 2.2 2.3 4L24 42Z" /></svg>
-          </div>
-          <canvas
-            id="wheel"
-            width="1000"
-            height="1000"
-            role="img"
-            aria-label="The lottery wheel is waiting for entrants."
-          ></canvas>
-          <div class="wheel-empty" id="wheel-empty">
-            <img src="/assets/gdg-mark.png" alt="" />
-            <strong>Waiting for the first name</strong>
-            <span>The wheel updates automatically.</span>
-          </div>
-          <div class="wheel-tooltip hidden" id="wheel-tooltip" role="status"></div>
-        </div>
-
-        <div class="public-winner hidden" id="public-winner" aria-live="assertive">
-          <span>Current winner</span>
-          <strong id="public-winner-name"></strong>
-        </div>
-
-        <details class="name-drawer">
-          <summary>See everyone on the wheel</summary>
-          <ul class="public-name-list" id="public-name-list"></ul>
-        </details>
-      </section>
     </main>
 
     <footer class="footer">
@@ -188,7 +150,6 @@
       Reconnecting to the live lottery…
     </div>
 
-    <script src="/wheel.js"></script>
     <script src="/theme.js"></script>
     <script src="/app.js"></script>
   </body>

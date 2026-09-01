@@ -7,6 +7,7 @@ const path = require('node:path');
 const test = require('node:test');
 
 const {
+  adminView,
   joinLottery,
   publicView,
   readState,
@@ -49,8 +50,9 @@ test('persistent lottery handles 175 concurrent entrants and unique draws', asyn
     const stored = await readState();
     assert.equal(stored.entries.length, 175);
     const publicState = publicView(stored);
-    assert.equal(publicState.entries.length, 175);
-    assert.equal('email' in publicState.entries[0], false);
+    assert.equal('entries' in publicState, false);
+    assert.equal(publicState.totalCount, 175);
+    assert.equal(adminView(stored).entries.length, 175);
 
     assert.throws(() => requireAdmin('wrong-password'), /Incorrect/);
     const countdownEnd = Date.now() + 10 * 60 * 1000;
