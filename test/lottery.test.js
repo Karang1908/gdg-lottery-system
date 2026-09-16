@@ -370,3 +370,31 @@ test('readState throws AppError with LOCAL_STATE_INVALID code when state file is
     await fs.rm(file, { force: true });
   }
 });
+
+test('runAdminAction remove clears winnerId when active winner is deleted', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-rmwin-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  process.env.ADMIN_PASSWORD = 'admin-pw';
+  try {
+    const entrant = await joinLottery({
+      name: 'Winner To Remove',
+      email: 'rmwin@example.com',
+    });
+    await runAdminAction('admin-pw', { action: 'draw' });
+    let state = await readState();
+    assert.equal(state.winnerId, entrant.entry.id);
+
+    await runAdminAction('admin-pw', {
+      action: 'remove',
+      entryId: entrant.entry.id,
+    });
+    state = await readState();
+    assert.equal(state.winnerId, null);
+    assert.equal(state.entries.length, 0);
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+});
