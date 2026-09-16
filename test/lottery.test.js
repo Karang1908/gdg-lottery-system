@@ -353,3 +353,20 @@ test('readState returns freshly initialized state when file does not exist', asy
   assert.deepEqual(state.entries, []);
   assert.deepEqual(state.history, []);
 });
+
+test('readState throws AppError with LOCAL_STATE_INVALID code when state file is corrupt', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-corrupt-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  try {
+    await fs.writeFile(file, '{ corrupt invalid json ...');
+    await assert.rejects(
+      () => readState(),
+      (err) => err.code === 'LOCAL_STATE_INVALID' && err.status === 500
+    );
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+});
