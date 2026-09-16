@@ -157,3 +157,15 @@ test('POST /api/admin returns 400 when body contains malformed JSON syntax', asy
   const json = await res.json();
   assert.match(json.error, /Request body must be valid JSON/);
 });
+
+test('API endpoints set Cache-Control private no-store headers to prevent intermediate caching', async () => {
+  const stateRes = await fetch(`${baseUrl}/api/state`);
+  assert.equal(stateRes.headers.get('cache-control'), 'private, no-store, max-age=0');
+
+  const joinRes = await fetch(`${baseUrl}/api/join`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: 'Header Check', email: 'header@test.com' }),
+  });
+  assert.equal(joinRes.headers.get('cache-control'), 'private, no-store, max-age=0');
+});
