@@ -179,3 +179,11 @@ test('GET /api/nonexistent returns 404 status code', async () => {
   const res = await fetch(`${baseUrl}/api/nonexistent`);
   assert.equal(res.status, 404);
 });
+
+test('GET /api/state?admin=0 returns public view and ignores admin credentials', async () => {
+  const res = await apiRequest('/api/state?admin=0', {
+    headers: { 'x-admin-password': 'api-test-password' },
+  });
+  assert.equal(res.status, 200);
+  assert.equal('entries' in res.data, false);
+});
