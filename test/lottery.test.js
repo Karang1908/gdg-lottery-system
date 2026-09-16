@@ -289,3 +289,21 @@ test('joinLottery rejects submissions once MAX_ENTRIES capacity is reached', asy
     await fs.rm(file, { force: true });
   }
 });
+
+test('runAdminAction get returns complete admin view including entries', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-get-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  process.env.ADMIN_PASSWORD = 'test-admin-secret';
+  try {
+    await joinLottery({ name: 'Bob Admin', email: 'bob@admin.test' });
+    const view = await runAdminAction('test-admin-secret', { action: 'get' });
+    assert.equal(view.totalCount, 1);
+    assert.equal(view.entries.length, 1);
+    assert.equal(view.entries[0].email, 'bob@admin.test');
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+});
