@@ -95,3 +95,11 @@ All state-changing operations run under a distributed Redis lock. This prevents
 simultaneous joins or admin actions from overwriting one another in Vercel's
 concurrent serverless execution model.
 
+
+## Troubleshooting
+
+### Storage and locking errors
+
+- **503 STORAGE_NOT_CONFIGURED**: Occurs on Vercel if Upstash Redis credentials are not connected. Ensure `KV_REST_API_URL` or `UPSTASH_REDIS_REST_URL` is configured in Project Settings.
+- **409 LOTTERY_BUSY**: Indicates concurrent mutations competed for the distributed lock and timed out after 8 seconds. Retrying after a moment resolves transient lock contention.
+- **Local reset**: Delete `.lottery-state.json` to reset the giveaway state during local development.
