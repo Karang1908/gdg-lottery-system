@@ -8,6 +8,7 @@ const test = require('node:test');
 
 const {
   adminView,
+  createState,
   joinLottery,
   publicView,
   readState,
@@ -260,3 +261,31 @@ test('entrant sanitization normalizes whitespace and rejects control characters'
   }
 });
 
+
+test('joinLottery rejects submissions once MAX_ENTRIES capacity is reached', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-cap-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  try {
+    const state = createState();
+    for (let i = 0; i < 1000; i += 1) {
+      state.entries.push({
+        id: `entry-${i}`,
+        name: `Person ${i}`,
+        email: `person${i}@example.com`,
+        joinedAt: new Date().toISOString(),
+        selectedAt: null,
+      });
+    }
+    await fs.writeFile(file, JSON.stringify(state));
+
+    await assert.rejects(
+      () => joinLottery({ name: 'Overflow Entrant', email: 'overflow@example.com' }),
+      /capacity/
+    );
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+});
