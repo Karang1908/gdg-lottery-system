@@ -98,3 +98,165 @@ test('validation rejects malformed entrant data', async () => {
     await fs.rm(file, { force: true });
   }
 });
+
+test('admin actions handle winner lifecycle, removal, and pool resets', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-admin-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  process.env.ADMIN_PASSWORD = 'admin-secret-key';
+  try {
+    await assert.rejects(
+      () => runAdminAction('admin-secret-key', { action: 'draw' }),
+      /No one has joined/
+    );
+    await assert.rejects(
+      () => runAdminAction('admin-secret-key', { action: 'advance' }),
+      /no current winner/
+    );
+    await assert.rejects(
+      () => runAdminAction('admin-secret-key', { action: 'return' }),
+      /no current winner/
+    );
+
+    const entrant1 = await joinLottery({
+      name: 'Alice Smith',
+      email: 'alice@example.com',
+    });
+    const entrant2 = await joinLottery({
+      name: 'Bob Jones',
+      email: 'bob@example.com',
+    });
+
+    const draw1 = await runAdminAction('admin-secret-key', { action: 'draw' });
+    assert.ok(draw1.winner);
+    assert.equal(draw1.winnerId, draw1.winner.id);
+
+    await assert.rejects(
+      () => runAdminAction('admin-secret-key', { action: 'draw' }),
+      /still on stage/
+    );
+
+    const returned = await runAdminAction('admin-secret-key', { action: 'return' });
+    assert.equal(returned.winner, null);
+    assert.equal(returned.winnerId, null);
+    assert.equal(returned.eligibleCount, 2);
+    assert.equal(returned.history.length, 0);
+
+    await runAdminAction('admin-secret-key', { action: 'draw' });
+    await runAdminAction('admin-secret-key', { action: 'advance' });
+    await runAdminAction('admin-secret-key', { action: 'draw' });
+    await runAdminAction('admin-secret-key', { action: 'advance' });
+
+    await assert.rejects(
+      () => runAdminAction('admin-secret-key', { action: 'draw' }),
+      /Everyone has already been selected/
+    );
+
+    await runAdminAction('admin-secret-key', {
+      action: 'remove',
+      entryId: entrant1.entry.id,
+    });
+    const stateAfterRemoval = await readState();
+    assert.equal(stateAfterRemoval.entries.length, 1);
+    assert.equal(stateAfterRemoval.entries[0].id, entrant2.entry.id);
+
+    await assert.rejects(
+      () =>
+        runAdminAction('admin-secret-key', {
+          action: 'remove',
+          entryId: 'non-existent',
+        }),
+      /no longer exists/
+    );
+
+    await assert.rejects(
+      () => runAdminAction('admin-secret-key', { action: 'unknown' }),
+      /Unknown admin action/
+    );
+
+    await runAdminAction('admin-secret-key', { action: 'resetAll' });
+    const cleared = await readState();
+    assert.equal(cleared.entries.length, 0);
+    assert.equal(cleared.history.length, 0);
+    assert.equal(cleared.winnerId, null);
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+});
+
+test('countdown scheduler enforces future boundary and allows cancellation', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-countdown-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  process.env.ADMIN_PASSWORD = 'admin-secret-key';
+  try {
+    await assert.rejects(
+      () =>
+        runAdminAction('admin-secret-key', {
+          action: 'setCountdown',
+          endsAt: Date.now(),
+        }),
+      /between a few seconds and 90 days/
+    );
+
+    const over90Days = Date.now() + 91 * 24 * 60 * 60 * 1000;
+    await assert.rejects(
+      () =>
+        runAdminAction('admin-secret-key', {
+          action: 'setCountdown',
+          endsAt: over90Days,
+        }),
+      /between a few seconds and 90 days/
+    );
+
+    await assert.rejects(
+      () =>
+        runAdminAction('admin-secret-key', {
+          action: 'setCountdown',
+          endsAt: 'invalid',
+        }),
+      /between a few seconds and 90 days/
+    );
+
+    const validEndsAt = Date.now() + 60_000;
+    const scheduled = await runAdminAction('admin-secret-key', {
+      action: 'setCountdown',
+      endsAt: validEndsAt,
+    });
+    assert.ok(scheduled.countdownEndsAt);
+
+    const cancelled = await runAdminAction('admin-secret-key', {
+      action: 'cancelCountdown',
+    });
+    assert.equal(cancelled.countdownEndsAt, null);
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+});
+
+test('entrant sanitization normalizes whitespace and rejects control characters', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-sanitize-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  try {
+    const joined = await joinLottery({
+      name: '  Grace \x00\x1f Hopper  \t  ',
+      email: '  Grace.Hopper@Example.COM  ',
+    });
+    assert.equal(joined.entry.name, 'Grace Hopper');
+
+    const state = await readState();
+    const stored = state.entries.find((e) => e.id === joined.entry.id);
+    assert.equal(stored.name, 'Grace Hopper');
+    assert.equal(stored.email, 'grace.hopper@example.com');
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+});
+
