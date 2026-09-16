@@ -135,3 +135,14 @@ test('POST /api/admin validates credentials and runs operations', async () => {
   assert.equal(cancelRes.status, 200);
   assert.equal(cancelRes.data.countdownEndsAt, null);
 });
+
+test('POST /api/join returns 400 when body contains malformed JSON syntax', async () => {
+  const res = await fetch(`${baseUrl}/api/join`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: '{"invalidJson',
+  });
+  assert.equal(res.status, 400);
+  const json = await res.json();
+  assert.match(json.error, /Request body must be valid JSON/);
+});
