@@ -81,6 +81,8 @@ app.get('/admin', (_request, response) =>
 app.use(
   express.static(ROOT, {
     setHeaders(response, filePath) {
+      // HTML documents must revalidate to pick up newly hashed bundle references.
+      // Static assets in production dist/ are content-hashed and safe to cache immutably.
       if (filePath.endsWith('.html')) {
         response.setHeader('Cache-Control', 'no-cache');
       } else if (BUILT) {
