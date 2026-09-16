@@ -307,3 +307,36 @@ test('runAdminAction get returns complete admin view including entries', async (
     await fs.rm(file, { force: true });
   }
 });
+
+test('runAdminAction draw caps history log to maximum 100 entries', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-hist-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  process.env.ADMIN_PASSWORD = 'test-admin-secret';
+  try {
+    const state = createState();
+    for (let i = 0; i < 105; i += 1) {
+      state.history.push({
+        id: `hist-${i}`,
+        entryId: `entry-${i}`,
+        name: `Winner ${i}`,
+        drawnAt: new Date().toISOString(),
+      });
+    }
+    state.entries.push({
+      id: 'entry-draw',
+      name: 'Draw Entrant',
+      email: 'draw@example.com',
+      joinedAt: new Date().toISOString(),
+      selectedAt: null,
+    });
+    await fs.writeFile(file, JSON.stringify(state));
+
+    const draw = await runAdminAction('test-admin-secret', { action: 'draw' });
+    assert.ok(draw.history.length <= 100);
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+});
