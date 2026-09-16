@@ -169,3 +169,8 @@ test('API endpoints set Cache-Control private no-store headers to prevent interm
   });
   assert.equal(joinRes.headers.get('cache-control'), 'private, no-store, max-age=0');
 });
+
+test('server disables x-powered-by header across all HTTP responses', async () => {
+  const res = await fetch(`${baseUrl}/healthz`);
+  assert.equal(res.headers.has('x-powered-by'), false);
+});
