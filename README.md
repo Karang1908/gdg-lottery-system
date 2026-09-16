@@ -73,10 +73,25 @@ settings of the connected database.
 ## API overview
 
 - `GET /api/state` — public names, counts, winner, history, countdown.
-- `POST /api/join` — add or resume an entry by email.
-- `GET /api/state?admin=1` — full state with `x-admin-password`.
-- `POST /api/admin` — authenticated draw and management actions.
+- `POST /api/join` — add or resume an entry by email (`{ name, email }`).
+- `GET /api/state?admin=1` — full state including entry email addresses (requires `x-admin-password` header).
+- `POST /api/admin` — authenticated draw and management actions (requires `x-admin-password` header).
+
+### Admin actions
+
+| Action | Payload properties | Description |
+| --- | --- | --- |
+| `get` | — | Retrieves current administrative state snapshot |
+| `draw` | — | Randomly selects one eligible entrant via `crypto.randomInt` and stages them as winner |
+| `advance` | — | Clears the active winner from the stage, allowing subsequent draws |
+| `return` | — | Returns current winner to the pool, restoring eligibility and removing them from history |
+| `remove` | `entryId` (string) | Removes a specific entrant from the giveaway roster |
+| `resetPool` | — | Resets eligibility for all registered entrants and clears winner history |
+| `resetAll` | — | Completely resets the giveaway state back to empty |
+| `setCountdown` | `endsAt` (number, epoch ms) | Sets a scheduled countdown timestamp (between +2s and +90 days) |
+| `cancelCountdown` | — | Cancels any active countdown schedule |
 
 All state-changing operations run under a distributed Redis lock. This prevents
 simultaneous joins or admin actions from overwriting one another in Vercel's
 concurrent serverless execution model.
+
