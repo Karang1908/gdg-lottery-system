@@ -97,30 +97,35 @@ app.use((error, _request, response, _next) => {
   return apiError(response, error);
 });
 
-const httpServer = app.listen(PORT);
+if (require.main === module) {
+  const httpServer = app.listen(PORT);
 
-httpServer.once('listening', () => {
-  console.log(`Lottery ready at http://localhost:${PORT}`);
-  if (!process.env.ADMIN_PASSWORD) {
-    console.warn('ADMIN_PASSWORD is not set; the admin console will stay locked.');
-  }
-  if (!process.env.KV_REST_API_URL && !process.env.UPSTASH_REDIS_REST_URL) {
-    console.log('Using ignored local state file for development.');
-  }
-});
+  httpServer.once('listening', () => {
+    console.log(`Lottery ready at http://localhost:${PORT}`);
+    if (!process.env.ADMIN_PASSWORD) {
+      console.warn('ADMIN_PASSWORD is not set; the admin console will stay locked.');
+    }
+    if (!process.env.KV_REST_API_URL && !process.env.UPSTASH_REDIS_REST_URL) {
+      console.log('Using ignored local state file for development.');
+    }
+  });
 
-httpServer.once('error', (error) => {
-  if (error.code === 'EADDRINUSE') {
-    console.error(
-      `Could not start the lottery: port ${PORT} is already in use. ` +
-        'Set a different PORT in .env and try again.'
-    );
-  } else if (error.code === 'EACCES' || error.code === 'EPERM') {
-    console.error(
-      `Could not start the lottery on port ${PORT}: permission denied.`
-    );
-  } else {
-    console.error('Could not start the lottery:', error.message);
-  }
-  process.exitCode = 1;
-});
+  httpServer.once('error', (error) => {
+    if (error.code === 'EADDRINUSE') {
+      console.error(
+        `Could not start the lottery: port ${PORT} is already in use. ` +
+          'Set a different PORT in .env and try again.'
+      );
+    } else if (error.code === 'EACCES' || error.code === 'EPERM') {
+      console.error(
+        `Could not start the lottery on port ${PORT}: permission denied.`
+      );
+    } else {
+      console.error('Could not start the lottery:', error.message);
+    }
+    process.exitCode = 1;
+  });
+}
+
+module.exports = { app };
+
