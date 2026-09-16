@@ -7,6 +7,7 @@ const path = require('node:path');
 const test = require('node:test');
 
 const {
+  AppError,
   adminView,
   createState,
   joinLottery,
@@ -397,4 +398,16 @@ test('runAdminAction remove clears winnerId when active winner is deleted', asyn
   } finally {
     await fs.rm(file, { force: true });
   }
+});
+
+test('AppError sets default status 400 and BAD_REQUEST code', () => {
+  const err = new AppError('Sample error');
+  assert.equal(err.name, 'AppError');
+  assert.equal(err.message, 'Sample error');
+  assert.equal(err.status, 400);
+  assert.equal(err.code, 'BAD_REQUEST');
+
+  const custom = new AppError('Server down', 503, 'SERVICE_UNAVAILABLE');
+  assert.equal(custom.status, 503);
+  assert.equal(custom.code, 'SERVICE_UNAVAILABLE');
 });
