@@ -146,3 +146,14 @@ test('POST /api/join returns 400 when body contains malformed JSON syntax', asyn
   const json = await res.json();
   assert.match(json.error, /Request body must be valid JSON/);
 });
+
+test('POST /api/admin returns 400 when body contains malformed JSON syntax', async () => {
+  const res = await fetch(`${baseUrl}/api/admin`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: '{broken',
+  });
+  assert.equal(res.status, 400);
+  const json = await res.json();
+  assert.match(json.error, /Request body must be valid JSON/);
+});
