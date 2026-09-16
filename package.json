@@ -9,6 +9,7 @@
     "start": "node server.js",
     "dev": "node server.js",
     "build": "node --check server.js && node --check lib/lottery.js && node build.js",
+    "check": "node --check server.js && node --check lib/lottery.js && node --check build.js",
     "test": "node --test"
   },
   "engines": {
