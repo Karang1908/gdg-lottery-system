@@ -340,3 +340,16 @@ test('runAdminAction draw caps history log to maximum 100 entries', async () => 
     await fs.rm(file, { force: true });
   }
 });
+
+test('readState returns freshly initialized state when file does not exist', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-missing-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  const state = await readState();
+  assert.equal(state.version, 1);
+  assert.equal(state.revision, 0);
+  assert.deepEqual(state.entries, []);
+  assert.deepEqual(state.history, []);
+});
