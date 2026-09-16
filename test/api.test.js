@@ -174,3 +174,8 @@ test('server disables x-powered-by header across all HTTP responses', async () =
   const res = await fetch(`${baseUrl}/healthz`);
   assert.equal(res.headers.has('x-powered-by'), false);
 });
+
+test('GET /api/nonexistent returns 404 status code', async () => {
+  const res = await fetch(`${baseUrl}/api/nonexistent`);
+  assert.equal(res.status, 404);
+});
