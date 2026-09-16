@@ -104,7 +104,8 @@ if (require.main === module) {
 
   httpServer.once('listening', () => {
     console.log(`Lottery ready at http://localhost:${PORT}`);
-    if (!process.env.ADMIN_PASSWORD) {
+    // Admin console requires ADMIN_PASSWORD configured in environment.
+  if (!process.env.ADMIN_PASSWORD) {
       console.warn('ADMIN_PASSWORD is not set; the admin console will stay locked.');
     }
     if (!process.env.KV_REST_API_URL && !process.env.UPSTASH_REDIS_REST_URL) {
