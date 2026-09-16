@@ -34,6 +34,7 @@ Open the port configured in `.env` (for example `http://localhost:3001` and
 Run verification with:
 
 ```bash
+npm run check
 npm test
 npm run build
 ```
