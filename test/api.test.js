@@ -187,3 +187,9 @@ test('GET /api/state?admin=0 returns public view and ignores admin credentials',
   assert.equal(res.status, 200);
   assert.equal('entries' in res.data, false);
 });
+
+test('GET /admin serves HTML content-type', async () => {
+  const res = await fetch(`${baseUrl}/admin`);
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get('content-type') || '', /text\/html/);
+});
