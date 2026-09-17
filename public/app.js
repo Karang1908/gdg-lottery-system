@@ -90,6 +90,11 @@
     updateCountdown();
   }
 
+  /**
+   * Formats remaining duration into days and clock digits.
+   * @param {number} milliseconds
+   * @returns {string}
+   */
   function formatRemaining(milliseconds) {
     if (milliseconds <= 0) return 'Ready to draw';
     const totalSeconds = Math.ceil(milliseconds / 1000);
