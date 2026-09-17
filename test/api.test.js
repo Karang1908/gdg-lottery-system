@@ -210,3 +210,14 @@ test('POST /api/admin requires x-admin-password header', async () => {
   const json = await res.json();
   assert.match(json.error, /admin password/i);
 });
+
+test('POST /api/join returns 201 for fresh registration', async () => {
+  const res = await fetch(`${baseUrl}/api/join`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: 'Fresh User', email: 'fresh@example.com' }),
+  });
+  assert.equal(res.status, 201);
+  const json = await res.json();
+  assert.equal(json.alreadyJoined, false);
+});
