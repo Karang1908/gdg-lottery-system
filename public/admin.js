@@ -76,6 +76,12 @@
     return payload;
   }
 
+  /**
+   * Dispatches an action command to the /api/admin endpoint.
+   * @param {string} action
+   * @param {Object} [extra]
+   * @returns {Promise<any>}
+   */
   async function adminAction(action, extra = {}) {
     showActionError('');
     return fetchJson('/api/admin', {
