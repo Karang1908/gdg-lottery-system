@@ -104,3 +104,11 @@ concurrent serverless execution model.
 - **503 STORAGE_NOT_CONFIGURED**: Occurs on Vercel if Upstash Redis credentials are not connected. Ensure `KV_REST_API_URL` or `UPSTASH_REDIS_REST_URL` is configured in Project Settings.
 - **409 LOTTERY_BUSY**: Indicates concurrent mutations competed for the distributed lock and timed out after 8 seconds. Retrying after a moment resolves transient lock contention.
 - **Local reset**: Delete `.lottery-state.json` to reset the giveaway state during local development.
+
+## Presentation Mode
+
+The admin console includes a dedicated Presentation Mode designed for screen sharing and event projectors:
+- Toggle with the **Present** button in the top bar.
+- Automatically hides entrant emails, roster search, reset buttons, and countdown scheduler.
+- Press **Escape** or click the corner exit icon to return to the operator view.
+- Presentation state is preserved in `sessionStorage` across accidental page refreshes.
