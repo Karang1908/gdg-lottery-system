@@ -411,3 +411,20 @@ test('AppError sets default status 400 and BAD_REQUEST code', () => {
   assert.equal(custom.status, 503);
   assert.equal(custom.code, 'SERVICE_UNAVAILABLE');
 });
+
+test('cleanName strips vertical tabs and form feeds', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-ctrl-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  try {
+    const joined = await joinLottery({
+      name: 'Alan\x0b\x0cTuring',
+      email: 'alan@turing.test',
+    });
+    assert.equal(joined.entry.name, 'AlanTuring');
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+});
