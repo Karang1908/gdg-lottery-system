@@ -17,6 +17,10 @@
   let failures = 0;
   let polling = false;
 
+  /**
+   * Retrieves stored entrant receipt from localStorage.
+   * @returns {{id: string, name: string, duplicate: boolean}|null}
+   */
   function readReceipt() {
     try {
       return JSON.parse(localStorage.getItem(RECEIPT_KEY) || 'null');
@@ -25,6 +29,10 @@
     }
   }
 
+  /**
+   * Persists entrant receipt to localStorage.
+   * @param {{id: string, name: string, duplicate: boolean}} value
+   */
   function storeReceipt(value) {
     receipt = value;
     try {
