@@ -221,3 +221,17 @@ test('POST /api/join returns 201 for fresh registration', async () => {
   const json = await res.json();
   assert.equal(json.alreadyJoined, false);
 });
+
+test('POST /api/admin returns 400 for invalid action payload', async () => {
+  const res = await fetch(`${baseUrl}/api/admin`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-admin-password': 'api-test-password',
+    },
+    body: JSON.stringify({ action: 'nonExistentAction' }),
+  });
+  assert.equal(res.status, 400);
+  const json = await res.json();
+  assert.equal(json.code, 'ACTION_INVALID');
+});
