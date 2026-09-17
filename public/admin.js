@@ -114,6 +114,9 @@
     );
   }
 
+  /**
+   * Filters and renders entrant roster list based on active search query.
+   */
   function renderRoster() {
     const query = searchInput.value.trim().toLowerCase();
     const entries = (state?.entries || []).filter(
