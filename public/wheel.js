@@ -104,6 +104,12 @@
       return BRAND[index % BRAND.length];
     }
 
+    /**
+     * Fits text into maxWidth, truncating with ellipsis when necessary.
+     * @param {string} text
+     * @param {number} maxWidth
+     * @returns {string}
+     */
     fitText(text, maxWidth) {
       if (this.ctx.measureText(text).width <= maxWidth) return text;
       const first = String(text).split(/\s+/)[0] || text;
