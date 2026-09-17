@@ -90,3 +90,10 @@ visualization of an already-committed draw, never the source of the outcome.
 - Color is never the sole indication of eligible, selected, or current status.
 - The wheel has a text roster equivalent because dense canvas labels cannot be
   reliably read by every user.
+
+## Concurrency & Distributed Durability
+
+State updates in serverless environments are coordinated through distributed locks:
+- All mutations acquire an Upstash Redis lock before reading and writing state.
+- Lock timeout safety net of 8,000ms prevents orphaned locks from deadlocking draws.
+- Short polling allows horizontal function scaling without requiring stateful websocket servers.
