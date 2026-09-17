@@ -6,6 +6,9 @@
   const btn = document.getElementById('theme-toggle');
   if (!btn) return;
 
+  /**
+   * Synchronizes theme icon visibility and accessibility attributes.
+   */
   function paint() {
     const dark = root.getAttribute('data-theme') === 'dark';
     btn.setAttribute('aria-pressed', String(dark));
