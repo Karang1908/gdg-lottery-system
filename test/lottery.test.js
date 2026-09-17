@@ -467,3 +467,10 @@ test('validEmail rejects missing TLD or domain', async () => {
     await fs.rm(file, { force: true });
   }
 });
+
+test('passwordMatches timing safe comparison against empty password', () => {
+  process.env.ADMIN_PASSWORD = 'strong-secret-key';
+  assert.throws(() => requireAdmin(''), /Incorrect/);
+  assert.throws(() => requireAdmin(null), /Incorrect/);
+  assert.throws(() => requireAdmin(undefined), /Incorrect/);
+});
