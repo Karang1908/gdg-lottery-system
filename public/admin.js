@@ -338,6 +338,10 @@
      of the room comes back presenting rather than exposing the entrant list. */
   const PRESENT_KEY = 'gdg-lottery-presenting';
 
+  /**
+   * Toggles presentation mode class and persists preference in sessionStorage.
+   * @param {boolean} on
+   */
   function setPresenting(on) {
     document.body.classList.toggle('is-presenting', on);
     try {
