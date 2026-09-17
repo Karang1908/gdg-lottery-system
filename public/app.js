@@ -56,6 +56,11 @@
     emailInput.setAttribute('aria-invalid', String(Boolean(message && !emailInput.validity.valid)));
   }
 
+  /**
+   * Renders the confirmation panel with entrant's name and status.
+   * @param {{name: string}} entry
+   * @param {boolean} duplicate
+   */
   function setConfirmed(entry, duplicate) {
     document.getElementById('confirmed-name').textContent = entry.name;
     document.getElementById('receipt-status').textContent = duplicate
@@ -65,6 +70,9 @@
     successPanel.classList.remove('hidden');
   }
 
+  /**
+   * Reveals the join form and hides the confirmation card.
+   */
   function setJoinVisible() {
     successPanel.classList.add('hidden');
     joinPanel.classList.remove('hidden');
