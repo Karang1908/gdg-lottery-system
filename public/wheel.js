@@ -13,6 +13,11 @@
   const BRAND = ['#4285f4', '#ea4335', '#fbbc04', '#34a853'];
   const TWO_PI = Math.PI * 2;
 
+  /**
+   * Normalizes an angle in radians into the [0, 2π) interval.
+   * @param {number} angle
+   * @returns {number}
+   */
   function normalizeAngle(angle) {
     return ((angle % TWO_PI) + TWO_PI) % TWO_PI;
   }
