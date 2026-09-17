@@ -193,3 +193,9 @@ test('GET /admin serves HTML content-type', async () => {
   assert.equal(res.status, 200);
   assert.match(res.headers.get('content-type') || '', /text\/html/);
 });
+
+test('GET /healthz sets text/plain response header', async () => {
+  const res = await fetch(`${baseUrl}/healthz`);
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get('content-type') || '', /text\/plain/);
+});
