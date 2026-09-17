@@ -428,3 +428,22 @@ test('cleanName strips vertical tabs and form feeds', async () => {
     await fs.rm(file, { force: true });
   }
 });
+
+test('cleanEmail converts uppercase and mixed-case domains', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-emailcase-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  try {
+    const joined = await joinLottery({
+      name: 'Katherine Johnson',
+      email: '  Katherine.Johnson@NASA.GOV  ',
+    });
+    const state = await readState();
+    const stored = state.entries.find((e) => e.id === joined.entry.id);
+    assert.equal(stored.email, 'katherine.johnson@nasa.gov');
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+});
