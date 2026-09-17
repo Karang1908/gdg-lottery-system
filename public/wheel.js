@@ -1,6 +1,15 @@
 (function () {
   'use strict';
 
+  /**
+   * @typedef {Object} WheelPalette
+   * @property {string} rim - Outer perimeter stroke color.
+   * @property {string} ink - Primary text and wedge label color.
+   * @property {string} muted - Background surface track color.
+   * @property {string} mutedInk - Subdued typography color.
+   * @property {string} hubBorder - Center hub perimeter border color.
+   */
+
   const BRAND = ['#4285f4', '#ea4335', '#fbbc04', '#34a853'];
   const TWO_PI = Math.PI * 2;
 
