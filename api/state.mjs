@@ -3,6 +3,11 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const { adminView, publicView, readState, requireAdmin } = require('../lib/lottery');
 
+/**
+ * Serverless function endpoint for giveaway state snapshots: GET /api/state
+ * @param {import('http').IncomingMessage} request
+ * @param {import('http').ServerResponse} response
+ */
 export default async function handler(request, response) {
   if (request.method !== 'GET') {
     response.setHeader('Allow', 'GET');
