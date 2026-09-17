@@ -126,6 +126,9 @@
     );
   }
 
+  /**
+   * Polls the server for state updates and updates connection banner on failures.
+   */
   async function refresh() {
     if (polling || document.hidden) return;
     polling = true;
