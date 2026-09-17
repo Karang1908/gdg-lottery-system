@@ -103,6 +103,9 @@
     return days ? `${days}d ${clock}` : clock;
   }
 
+  /**
+   * Calculates time remaining to next scheduled draw and updates DOM countdown.
+   */
   function updateCountdown() {
     const output = document.getElementById('admin-countdown');
     if (!state?.countdownEndsAt) {
