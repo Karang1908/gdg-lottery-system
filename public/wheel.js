@@ -66,6 +66,10 @@
       this.draw();
     }
 
+    /**
+     * Reads theme colors from root CSS custom properties.
+     * @returns {WheelPalette}
+     */
     readPalette() {
       const styles = getComputedStyle(document.documentElement);
       const value = (name, fallback) =>
