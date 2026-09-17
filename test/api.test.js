@@ -199,3 +199,14 @@ test('GET /healthz sets text/plain response header', async () => {
   assert.equal(res.status, 200);
   assert.match(res.headers.get('content-type') || '', /text\/plain/);
 });
+
+test('POST /api/admin requires x-admin-password header', async () => {
+  const res = await fetch(`${baseUrl}/api/admin`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'draw' }),
+  });
+  assert.equal(res.status, 401);
+  const json = await res.json();
+  assert.match(json.error, /admin password/i);
+});
