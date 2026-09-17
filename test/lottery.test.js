@@ -11,6 +11,7 @@ const {
   adminView,
   createState,
   joinLottery,
+  normalizeState,
   publicView,
   readState,
   requireAdmin,
@@ -473,4 +474,11 @@ test('passwordMatches timing safe comparison against empty password', () => {
   assert.throws(() => requireAdmin(''), /Incorrect/);
   assert.throws(() => requireAdmin(null), /Incorrect/);
   assert.throws(() => requireAdmin(undefined), /Incorrect/);
+});
+
+test('normalizeState preserves custom revision counter', () => {
+  const state = normalizeState({ revision: 42, entries: [] });
+  assert.equal(state.revision, 42);
+  const nanState = normalizeState({ revision: 'invalid', entries: [] });
+  assert.equal(nanState.revision, 0);
 });
