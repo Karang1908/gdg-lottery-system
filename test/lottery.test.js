@@ -447,3 +447,23 @@ test('cleanEmail converts uppercase and mixed-case domains', async () => {
     await fs.rm(file, { force: true });
   }
 });
+
+test('validEmail rejects missing TLD or domain', async () => {
+  const file = path.join(
+    os.tmpdir(),
+    `gdg-lottery-bademail-${process.pid}-${Date.now()}.json`
+  );
+  process.env.LOTTERY_LOCAL_STATE_FILE = file;
+  try {
+    await assert.rejects(
+      () => joinLottery({ name: 'Valid User', email: 'user@nodomain' }),
+      /valid email/
+    );
+    await assert.rejects(
+      () => joinLottery({ name: 'Valid User', email: 'user@.com' }),
+      /valid email/
+    );
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+});
