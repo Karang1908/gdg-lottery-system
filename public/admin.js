@@ -27,12 +27,20 @@
   let polling = false;
   let toastTimer = null;
 
+  /**
+   * Displays login form error and marks password input invalid.
+   * @param {string} message
+   */
   function showLoginError(message) {
     loginError.textContent = message || '';
     loginError.classList.toggle('hidden', !message);
     passwordInput.setAttribute('aria-invalid', String(Boolean(message)));
   }
 
+  /**
+   * Displays banner error message for administrative operations.
+   * @param {string} message
+   */
   function showActionError(message) {
     actionError.textContent = message || '';
     actionError.classList.toggle('hidden', !message);
