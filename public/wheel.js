@@ -99,6 +99,13 @@
       this.draw();
     }
 
+    /**
+     * Selects slice fill color cycling through Google 4-brand palette.
+     * Avoids adjacent color collision on slice wrap-around.
+     * @param {number} index
+     * @param {number} count
+     * @returns {string}
+     */
     colorFor(index, count) {
       if (count > 1 && index === count - 1 && count % 4 === 1) return BRAND[1];
       return BRAND[index % BRAND.length];
