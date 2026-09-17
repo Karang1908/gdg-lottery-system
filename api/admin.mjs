@@ -3,6 +3,11 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const { runAdminAction } = require('../lib/lottery');
 
+/**
+ * Serverless function endpoint for administrative operations: POST /api/admin
+ * @param {import('http').IncomingMessage} request
+ * @param {import('http').ServerResponse} response
+ */
 export default async function handler(request, response) {
   if (request.method !== 'POST') {
     response.setHeader('Allow', 'POST');
