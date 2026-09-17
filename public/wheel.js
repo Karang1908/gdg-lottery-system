@@ -23,6 +23,10 @@
   }
 
   class LotteryWheel {
+    /**
+     * Instantiates the LotteryWheel and binds pointer and theme listeners.
+     * @param {{canvas: HTMLCanvasElement, empty: HTMLElement, tooltip: HTMLElement}} elements
+     */
     constructor({ canvas, empty, tooltip }) {
       this.canvas = canvas;
       if (window.innerWidth <= 700) {
