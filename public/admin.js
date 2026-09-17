@@ -53,6 +53,12 @@
     toastTimer = setTimeout(() => toast.classList.add('hidden'), 3200);
   }
 
+  /**
+   * Authenticated fetch helper injecting x-admin-password header.
+   * @param {string} url
+   * @param {RequestInit} [options]
+   * @returns {Promise<any>}
+   */
   async function fetchJson(url, options = {}) {
     const headers = {
       ...(options.body ? { 'Content-Type': 'application/json' } : {}),
