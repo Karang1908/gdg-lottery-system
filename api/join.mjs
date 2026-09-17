@@ -3,6 +3,11 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const { joinLottery } = require('../lib/lottery');
 
+/**
+ * Serverless function endpoint for entrant self-registration: POST /api/join
+ * @param {import('http').IncomingMessage} request
+ * @param {import('http').ServerResponse} response
+ */
 export default async function handler(request, response) {
   if (request.method !== 'POST') {
     response.setHeader('Allow', 'POST');
