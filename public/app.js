@@ -49,6 +49,10 @@
     } catch {}
   }
 
+  /**
+   * Displays validation error message and updates input aria-invalid attributes.
+   * @param {string} message
+   */
   function showError(message) {
     joinError.textContent = message || '';
     joinError.classList.toggle('hidden', !message);
