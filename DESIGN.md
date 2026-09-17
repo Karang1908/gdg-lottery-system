@@ -81,3 +81,9 @@ or projector environment. Dark mode remains first-class and explicit.
   legibility while reducing memory and main-thread work on lower-power devices.
 - Polling pauses while a tab is hidden, then refreshes immediately on return.
 - Dense wheel slices support tap lookup in addition to desktop hover.
+
+## Touch Accessibility Standards
+
+- Interactive controls maintain a minimum touch target bounding box of 44x44px.
+- Coarse pointer interactions display an accessible hover lookup card that automatically clears after 2,200ms.
+- Animation timing uses ease-out decel curves and respects prefers-reduced-motion media query settings.
