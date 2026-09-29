@@ -256,3 +256,12 @@ test('POST /api/join rejects submission with missing name field', async () => {
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'NAME_REQUIRED');
 });
+
+test('POST /api/join rejects submission with missing email field', async () => {
+  const res = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: 'No Email User' },
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'EMAIL_INVALID');
+});
