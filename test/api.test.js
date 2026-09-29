@@ -291,3 +291,14 @@ test('POST /api/admin return returns 409 when no winner is active', async () => 
   assert.equal(res.status, 409);
   assert.equal(res.data.code, 'NO_WINNER');
 });
+
+test('POST /api/admin resetPool resets eligible pool and clears winner history', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'resetPool' },
+  });
+  assert.equal(res.status, 200);
+  assert.equal(res.data.history.length, 0);
+  assert.equal(res.data.winner, null);
+});
