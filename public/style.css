@@ -1527,6 +1527,7 @@ body.is-presenting .btn-draw {
   }
 }
 
+/* Collapse two-column layouts into single vertical scroll on tablet & mobile */
 @media (max-width: 900px) {
   .entrant-layout,
   .admin-layout {
