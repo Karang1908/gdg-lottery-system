@@ -508,3 +508,15 @@ test('redisConfig strips trailing slashes from REST URL', () => {
   delete process.env.UPSTASH_REDIS_REST_URL;
   delete process.env.UPSTASH_REDIS_REST_TOKEN;
 });
+
+test('redisConfig returns null when token or url is missing', () => {
+  delete process.env.KV_REST_API_URL;
+  delete process.env.KV_REST_API_TOKEN;
+  delete process.env.UPSTASH_REDIS_REST_URL;
+  delete process.env.UPSTASH_REDIS_REST_TOKEN;
+  assert.equal(redisConfig(), null);
+
+  process.env.KV_REST_API_URL = 'https://kv.example.com';
+  assert.equal(redisConfig(), null);
+  delete process.env.KV_REST_API_URL;
+});
