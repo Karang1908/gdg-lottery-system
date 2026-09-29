@@ -271,3 +271,13 @@ test('GET /api/state returns application/json content-type header', async () => 
   assert.equal(res.status, 200);
   assert.match(res.headers.get('content-type') || '', /application\/json/);
 });
+
+test('POST /api/admin advance returns 409 when no winner is on stage', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'advance' },
+  });
+  assert.equal(res.status, 409);
+  assert.equal(res.data.code, 'NO_WINNER');
+});
