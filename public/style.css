@@ -1220,6 +1220,7 @@ p {
   outline: none;
 }
 
+/* Capped scrollable entrant roster optimized for 150-1000 items */
 .roster-scroll {
   max-height: 420px;
   margin-top: 14px;
