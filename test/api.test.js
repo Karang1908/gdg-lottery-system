@@ -302,3 +302,9 @@ test('POST /api/admin resetPool resets eligible pool and clears winner history',
   assert.equal(res.data.history.length, 0);
   assert.equal(res.data.winner, null);
 });
+
+test('server exports app and numerical PORT configuration', () => {
+  const { PORT } = require('../server');
+  assert.equal(typeof PORT, 'number');
+  assert.ok(PORT > 0);
+});
