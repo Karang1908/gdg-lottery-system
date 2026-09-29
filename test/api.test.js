@@ -235,3 +235,15 @@ test('POST /api/admin returns 400 for invalid action payload', async () => {
   const json = await res.json();
   assert.equal(json.code, 'ACTION_INVALID');
 });
+
+test('POST /api/join rejects request bodies exceeding 16kb limit', async () => {
+  const hugeBody = { name: 'A'.repeat(17000), email: 'huge@example.com' };
+  const res = await fetch(`${baseUrl}/api/join`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(hugeBody),
+  });
+  assert.equal(res.status, 413);
+  const json = await res.json();
+  assert.match(json.error, /request entity too large/i);
+});
