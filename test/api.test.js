@@ -247,3 +247,12 @@ test('POST /api/join rejects request bodies exceeding 16kb limit', async () => {
   const json = await res.json();
   assert.match(json.error, /request entity too large/i);
 });
+
+test('POST /api/join rejects submission with missing name field', async () => {
+  const res = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { email: 'noname@example.com' },
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'NAME_REQUIRED');
+});
