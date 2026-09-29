@@ -559,3 +559,15 @@ test('publicView excludes selected winner from eligibleCount calculation', () =>
   assert.equal(view.totalCount, 2);
   assert.equal(view.eligibleCount, 1);
 });
+
+test('normalizeState sanitizes non-string entry IDs and names', () => {
+  const state = normalizeState({
+    entries: [
+      { id: 'valid-id', name: 12345, email: 'user@test.com' },
+      { id: null, name: 'Invalid' },
+      null,
+    ],
+  });
+  assert.equal(state.entries.length, 1);
+  assert.equal(state.entries[0].name, '12345');
+});
