@@ -1418,6 +1418,7 @@ p {
   color: var(--text);
 }
 
+/* Presentation mode: hide operator controls and expand wheel for projector viewing */
 body.is-presenting .present-exit {
   display: grid;
 }
