@@ -11,8 +11,11 @@ const {
   adminView,
   createState,
   joinLottery,
+  cloudRequiresRedis,
   normalizeState,
   publicView,
+  redisConfig,
+  withLocalLock,
   readState,
   requireAdmin,
   runAdminAction,
@@ -481,4 +484,18 @@ test('normalizeState preserves custom revision counter', () => {
   assert.equal(state.revision, 42);
   const nanState = normalizeState({ revision: 'invalid', entries: [] });
   assert.equal(nanState.revision, 0);
+});
+
+test('redisConfig prefers KV_REST_API_URL over legacy UPSTASH vars', () => {
+  process.env.KV_REST_API_URL = 'https://kv.example.com/';
+  process.env.KV_REST_API_TOKEN = 'kv-token';
+  process.env.UPSTASH_REDIS_REST_URL = 'https://upstash.example.com';
+  process.env.UPSTASH_REDIS_REST_TOKEN = 'upstash-token';
+  const config = redisConfig();
+  assert.equal(config.url, 'https://kv.example.com');
+  assert.equal(config.token, 'kv-token');
+  delete process.env.KV_REST_API_URL;
+  delete process.env.KV_REST_API_TOKEN;
+  delete process.env.UPSTASH_REDIS_REST_URL;
+  delete process.env.UPSTASH_REDIS_REST_TOKEN;
 });
