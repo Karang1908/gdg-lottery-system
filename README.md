@@ -112,3 +112,10 @@ The admin console includes a dedicated Presentation Mode designed for screen sha
 - Automatically hides entrant emails, roster search, reset buttons, and countdown scheduler.
 - Press **Escape** or click the corner exit icon to return to the operator view.
 - Presentation state is preserved in `sessionStorage` across accidental page refreshes.
+
+## Event Day Operator Checklist
+
+1. **Verify Redis Connection**: Check `GET /healthz` and ensure no `503 STORAGE_NOT_CONFIGURED` warnings appear in server logs.
+2. **Set ADMIN_PASSWORD**: Keep the password securely available on the operator device.
+3. **Pre-draw Verification**: Perform a test draw and return the winner to pool before attendees arrive.
+4. **Display Presentation Mode**: Switch to presentation mode (`Present` button or hotkey) prior to projecting to the room.
