@@ -44,7 +44,9 @@
   font-display: swap;
 }
 
-/* ---------- tokens ---------- */
+/* ---------- design tokens ----------
+   Neutral surfaces, typography sizes, and border-radius scales
+   following the Google Design Guidelines. */
 
 :root {
   /* Google brand four */
