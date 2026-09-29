@@ -548,3 +548,14 @@ test('withLocalLock serializes asynchronous mutations sequentially', async () =>
   await Promise.all([p1, p2]);
   assert.deepEqual(sequence, [1, 2]);
 });
+
+test('publicView excludes selected winner from eligibleCount calculation', () => {
+  const state = createState();
+  state.entries = [
+    { id: '1', name: 'Entrant 1', email: '1@test.com', selectedAt: null },
+    { id: '2', name: 'Entrant 2', email: '2@test.com', selectedAt: new Date().toISOString() },
+  ];
+  const view = publicView(state);
+  assert.equal(view.totalCount, 2);
+  assert.equal(view.eligibleCount, 1);
+});
