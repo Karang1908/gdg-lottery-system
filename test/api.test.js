@@ -265,3 +265,9 @@ test('POST /api/join rejects submission with missing email field', async () => {
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'EMAIL_INVALID');
 });
+
+test('GET /api/state returns application/json content-type header', async () => {
+  const res = await fetch(`${baseUrl}/api/state`);
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get('content-type') || '', /application\/json/);
+});
