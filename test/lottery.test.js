@@ -571,3 +571,14 @@ test('normalizeState sanitizes non-string entry IDs and names', () => {
   assert.equal(state.entries.length, 1);
   assert.equal(state.entries[0].name, '12345');
 });
+
+test('normalizeState bounds history items to safe strings', () => {
+  const state = normalizeState({
+    history: [
+      { id: 'h1', entryId: 'e1', name: 'A'.repeat(200) },
+      { invalid: true },
+    ],
+  });
+  assert.equal(state.history.length, 1);
+  assert.ok(state.history[0].name.length <= 80);
+});
