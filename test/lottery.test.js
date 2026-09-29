@@ -535,3 +535,16 @@ test('cloudRequiresRedis detects VERCEL flag and respects LOTTERY_ALLOW_LOCAL_FI
   delete process.env.VERCEL;
   delete process.env.LOTTERY_ALLOW_LOCAL_FILE;
 });
+
+test('withLocalLock serializes asynchronous mutations sequentially', async () => {
+  const sequence = [];
+  const p1 = withLocalLock(async () => {
+    await new Promise((r) => setTimeout(r, 20));
+    sequence.push(1);
+  });
+  const p2 = withLocalLock(async () => {
+    sequence.push(2);
+  });
+  await Promise.all([p1, p2]);
+  assert.deepEqual(sequence, [1, 2]);
+});
