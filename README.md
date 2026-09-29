@@ -119,3 +119,13 @@ The admin console includes a dedicated Presentation Mode designed for screen sha
 2. **Set ADMIN_PASSWORD**: Keep the password securely available on the operator device.
 3. **Pre-draw Verification**: Perform a test draw and return the winner to pool before attendees arrive.
 4. **Display Presentation Mode**: Switch to presentation mode (`Present` button or hotkey) prior to projecting to the room.
+
+## Environment Variables Reference
+
+| Variable | Required | Default | Description |
+| --- | --- | --- | --- |
+| `ADMIN_PASSWORD` | Yes | — | Authentication secret for the operator console at `/admin` |
+| `PORT` | No | `3000` | Local HTTP server port |
+| `KV_REST_API_URL` | Vercel | — | Upstash Redis REST endpoint injected by Vercel KV |
+| `KV_REST_API_TOKEN` | Vercel | — | Upstash Redis REST authentication token |
+| `LOTTERY_ALLOW_LOCAL_FILE` | No | `0` | Overrides Vercel Redis requirement for testing |
