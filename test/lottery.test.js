@@ -520,3 +520,18 @@ test('redisConfig returns null when token or url is missing', () => {
   assert.equal(redisConfig(), null);
   delete process.env.KV_REST_API_URL;
 });
+
+test('cloudRequiresRedis detects VERCEL flag and respects LOTTERY_ALLOW_LOCAL_FILE', () => {
+  delete process.env.VERCEL;
+  delete process.env.LOTTERY_ALLOW_LOCAL_FILE;
+  assert.equal(cloudRequiresRedis(), false);
+
+  process.env.VERCEL = '1';
+  assert.equal(cloudRequiresRedis(), true);
+
+  process.env.LOTTERY_ALLOW_LOCAL_FILE = '1';
+  assert.equal(cloudRequiresRedis(), false);
+
+  delete process.env.VERCEL;
+  delete process.env.LOTTERY_ALLOW_LOCAL_FILE;
+});
