@@ -10,7 +10,8 @@
     "dev": "node server.js",
     "build": "node --check server.js && node --check lib/lottery.js && node build.js",
     "check": "node --check server.js && node --check lib/lottery.js && node --check build.js",
-    "test": "node --test"
+    "test": "node --test",
+    "clean": "node -e \"fs.rmSync('dist', { recursive: true, force: true })\""
   },
   "engines": {
     "node": ">=20"
