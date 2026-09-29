@@ -499,3 +499,12 @@ test('redisConfig prefers KV_REST_API_URL over legacy UPSTASH vars', () => {
   delete process.env.UPSTASH_REDIS_REST_URL;
   delete process.env.UPSTASH_REDIS_REST_TOKEN;
 });
+
+test('redisConfig strips trailing slashes from REST URL', () => {
+  process.env.UPSTASH_REDIS_REST_URL = 'https://upstash.example.com///';
+  process.env.UPSTASH_REDIS_REST_TOKEN = 'token';
+  const config = redisConfig();
+  assert.equal(config.url, 'https://upstash.example.com');
+  delete process.env.UPSTASH_REDIS_REST_URL;
+  delete process.env.UPSTASH_REDIS_REST_TOKEN;
+});
