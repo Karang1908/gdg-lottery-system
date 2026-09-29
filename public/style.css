@@ -8,7 +8,9 @@
    mid-tones, no subtle gradients — compression eats all three.
    ========================================================================== */
 
-/* ---------- typeface ---------- */
+/* ---------- typography & font declarations ----------
+   Google Sans for titles, countdown numerals, and wheel labels.
+   Google Sans Text for body, form fields, and roster items. */
 
 /* Google Sans ships as a *variable* font: one file covers the whole weight
    range, so declaring 400/500/700 separately downloads three byte-identical
