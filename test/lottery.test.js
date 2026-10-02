@@ -628,3 +628,11 @@ test('createState returns fresh independent state objects', () => {
   assert.notEqual(s1.entries, s2.entries);
   assert.notEqual(s1.history, s2.history);
 });
+
+test('createState initializes version to 1 and revision to 0', () => {
+  const state = createState();
+  assert.equal(state.version, 1);
+  assert.equal(state.revision, 0);
+  assert.equal(state.winnerId, null);
+  assert.equal(state.countdownEndsAt, null);
+});
