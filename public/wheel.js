@@ -252,6 +252,12 @@
       this.tooltip?.classList.add('hidden');
     }
 
+    /**
+     * Animates wheel rotation to align selected winning slice with top indicator needle.
+     * Applies ease-out deceleration curve and respects prefers-reduced-motion preferences.
+     * @param {number} index - Index of selected entrant in this.entries
+     * @returns {Promise<void>}
+     */
     async spinTo(index) {
       if (this.spinning || index < 0 || index >= this.entries.length) return;
       const count = this.entries.length;
