@@ -374,3 +374,19 @@ test('POST /api/admin setCountdown rejects countdowns exceeding 90 days', async 
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'COUNTDOWN_INVALID');
 });
+
+test('POST /api/admin cancelCountdown clears active countdown schedule', async () => {
+  const validEndsAt = Date.now() + 180_000;
+  await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'setCountdown', endsAt: validEndsAt },
+  });
+  const cancelRes = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'cancelCountdown' },
+  });
+  assert.equal(cancelRes.status, 200);
+  assert.equal(cancelRes.data.countdownEndsAt, null);
+});
