@@ -604,3 +604,8 @@ test('cleanName strips ASCII null and DEL control characters', () => {
   const cleaned = cleanName('Jane\x00\x7fDoe');
   assert.equal(cleaned, 'JaneDoe');
 });
+
+test('validEmail accepts complex valid subdomains', () => {
+  assert.equal(validEmail('organizer@campus.bits-dubai.ac.ae'), true);
+  assert.equal(validEmail('first.last+tag@mail.sub.example.com'), true);
+});
