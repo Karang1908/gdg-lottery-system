@@ -587,3 +587,9 @@ test('normalizeState bounds history items to safe strings', () => {
   assert.equal(state.history.length, 1);
   assert.ok(state.history[0].name.length <= 80);
 });
+
+test('cleanName truncates input to MAX_NAME_LENGTH characters', () => {
+  const truncated = cleanName('A'.repeat(120));
+  assert.equal(truncated.length, MAX_NAME_LENGTH);
+  assert.equal(truncated, 'A'.repeat(MAX_NAME_LENGTH));
+});
