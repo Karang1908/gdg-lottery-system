@@ -316,3 +316,12 @@ test('GET /api/state returns identical revision on unmutated state', async () =>
   assert.equal(res2.status, 200);
   assert.equal(res1.data.revision, res2.data.revision);
 });
+
+test('POST /api/join trims leading and trailing whitespace from entrant name', async () => {
+  const res = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: '   Trimmed User   ', email: 'trimmed.user@example.com' },
+  });
+  assert.equal(res.status, 201);
+  assert.equal(res.data.entry.name, 'Trimmed User');
+});
