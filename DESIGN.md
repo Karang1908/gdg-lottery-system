@@ -87,3 +87,8 @@ or projector environment. Dark mode remains first-class and explicit.
 - Interactive controls maintain a minimum touch target bounding box of 44x44px.
 - Coarse pointer interactions display an accessible hover lookup card that automatically clears after 2,200ms.
 - Animation timing uses ease-out decel curves and respects prefers-reduced-motion media query settings.
+
+## High-DPI Canvas Rendering
+
+- Wheel canvas renders at crisp internal resolutions on mobile (720x720 internal buffer) and scales via CSS percentages.
+- Retains legibility under video compression and projector optical softness.
