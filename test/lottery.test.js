@@ -8,7 +8,12 @@ const test = require('node:test');
 
 const {
   AppError,
+  MAX_EMAIL_LENGTH,
+  MAX_NAME_LENGTH,
   adminView,
+  cleanEmail,
+  cleanName,
+  validEmail,
   createState,
   joinLottery,
   cloudRequiresRedis,
