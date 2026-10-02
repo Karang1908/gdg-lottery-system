@@ -1,4 +1,7 @@
-"""Focused phone QA for the authenticated admin console."""
+"""Focused phone QA for the authenticated admin console.
+
+Simulates 390x844 mobile viewport with touch capability and verifies 44px touch targets.
+"""
 
 import json
 import sys
