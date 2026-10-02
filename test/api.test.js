@@ -353,3 +353,13 @@ test('POST /api/admin setCountdown rejects non-numeric endsAt', async () => {
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'COUNTDOWN_INVALID');
 });
+
+test('POST /api/admin setCountdown rejects countdowns under two seconds into future', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'setCountdown', endsAt: Date.now() + 500 },
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'COUNTDOWN_INVALID');
+});
