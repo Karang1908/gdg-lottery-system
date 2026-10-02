@@ -129,3 +129,12 @@ The admin console includes a dedicated Presentation Mode designed for screen sha
 | `KV_REST_API_URL` | Vercel | — | Upstash Redis REST endpoint injected by Vercel KV |
 | `KV_REST_API_TOKEN` | Vercel | — | Upstash Redis REST authentication token |
 | `LOTTERY_ALLOW_LOCAL_FILE` | No | `0` | Overrides Vercel Redis requirement for testing |
+
+## Architecture Diagram
+
+```text
+[ Attendee Browser ]  -->  GET /api/state   --> [ Serverless Function ] --> [ Upstash Redis ]
+                      -->  POST /api/join   -->        | (with distributed lock)
+                                                       v
+[ Operator Console ]  -->  POST /api/admin  --> [ Serverless Function ] --> [ State Mutation ]
+```
