@@ -343,3 +343,13 @@ test('POST /api/join rejects single-character names with 400', async () => {
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'NAME_REQUIRED');
 });
+
+test('POST /api/admin setCountdown rejects non-numeric endsAt', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'setCountdown', endsAt: 'invalid-string' },
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'COUNTDOWN_INVALID');
+});
