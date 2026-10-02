@@ -615,3 +615,8 @@ test('validEmail rejects emails containing whitespace', () => {
   assert.equal(validEmail('user@ example.com'), false);
   assert.equal(validEmail('user@example .com'), false);
 });
+
+test('validEmail rejects strings missing at sign', () => {
+  assert.equal(validEmail('plainaddress.com'), false);
+  assert.equal(validEmail('invalid.address'), false);
+});
