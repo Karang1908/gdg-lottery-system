@@ -609,3 +609,9 @@ test('validEmail accepts complex valid subdomains', () => {
   assert.equal(validEmail('organizer@campus.bits-dubai.ac.ae'), true);
   assert.equal(validEmail('first.last+tag@mail.sub.example.com'), true);
 });
+
+test('validEmail rejects emails containing whitespace', () => {
+  assert.equal(validEmail('user @example.com'), false);
+  assert.equal(validEmail('user@ example.com'), false);
+  assert.equal(validEmail('user@example .com'), false);
+});
