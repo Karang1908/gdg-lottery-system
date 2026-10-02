@@ -636,3 +636,11 @@ test('createState initializes version to 1 and revision to 0', () => {
   assert.equal(state.winnerId, null);
   assert.equal(state.countdownEndsAt, null);
 });
+
+test('adminView deep-copies entries array', () => {
+  const state = createState();
+  state.entries.push({ id: 'e1', name: 'User 1', email: 'user1@test.com' });
+  const view = adminView(state);
+  view.entries[0].name = 'Mutated';
+  assert.equal(state.entries[0].name, 'User 1');
+});
