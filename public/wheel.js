@@ -217,6 +217,11 @@
       }
     }
 
+    /**
+     * Hit-tests cursor or touch pointer coordinates against radial wheel slices.
+     * Computes slice index from atan2 angle and positions accessible tooltip.
+     * @param {PointerEvent} event
+     */
     onPointerMove(event) {
       if (!this.entries.length || this.spinning || !this.tooltip) {
         this.hideTooltip();
