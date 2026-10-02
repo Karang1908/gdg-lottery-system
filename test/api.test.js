@@ -334,3 +334,12 @@ test('POST /api/join accepts valid unicode names with diacritics', async () => {
   assert.equal(res.status, 201);
   assert.equal(res.data.entry.name, 'Renée François');
 });
+
+test('POST /api/join rejects single-character names with 400', async () => {
+  const res = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: 'J', email: 'j@example.com' },
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'NAME_REQUIRED');
+});
