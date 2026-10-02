@@ -143,6 +143,7 @@
       if (!state || next.revision !== state.revision) render(next);
       else state.countdownEndsAt = next.countdownEndsAt;
     } catch {
+      // Consecutive failed polling cycles trigger the offline reconnect banner.
       failures += 1;
       if (failures >= 2) connectionBanner.classList.remove('hidden');
     } finally {
