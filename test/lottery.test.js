@@ -593,3 +593,9 @@ test('cleanName truncates input to MAX_NAME_LENGTH characters', () => {
   assert.equal(truncated.length, MAX_NAME_LENGTH);
   assert.equal(truncated, 'A'.repeat(MAX_NAME_LENGTH));
 });
+
+test('cleanEmail truncates input to MAX_EMAIL_LENGTH characters', () => {
+  const truncated = cleanEmail('a'.repeat(300));
+  assert.equal(truncated.length, MAX_EMAIL_LENGTH);
+  assert.equal(truncated, 'a'.repeat(MAX_EMAIL_LENGTH));
+});
