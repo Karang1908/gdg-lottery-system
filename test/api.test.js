@@ -325,3 +325,12 @@ test('POST /api/join trims leading and trailing whitespace from entrant name', a
   assert.equal(res.status, 201);
   assert.equal(res.data.entry.name, 'Trimmed User');
 });
+
+test('POST /api/join accepts valid unicode names with diacritics', async () => {
+  const res = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: 'Renée François', email: 'renee.francois@example.com' },
+  });
+  assert.equal(res.status, 201);
+  assert.equal(res.data.entry.name, 'Renée François');
+});
