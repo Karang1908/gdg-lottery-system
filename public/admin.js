@@ -50,6 +50,7 @@
     clearTimeout(toastTimer);
     toast.textContent = message;
     toast.classList.remove('hidden');
+    // Automatically dismiss toast message after 3200ms duration.
     toastTimer = setTimeout(() => toast.classList.add('hidden'), 3200);
   }
 
