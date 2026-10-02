@@ -308,3 +308,11 @@ test('server exports app and numerical PORT configuration', () => {
   assert.equal(typeof PORT, 'number');
   assert.ok(PORT > 0);
 });
+
+test('GET /api/state returns identical revision on unmutated state', async () => {
+  const res1 = await apiRequest('/api/state');
+  const res2 = await apiRequest('/api/state');
+  assert.equal(res1.status, 200);
+  assert.equal(res2.status, 200);
+  assert.equal(res1.data.revision, res2.data.revision);
+});
