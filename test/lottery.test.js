@@ -599,3 +599,8 @@ test('cleanEmail truncates input to MAX_EMAIL_LENGTH characters', () => {
   assert.equal(truncated.length, MAX_EMAIL_LENGTH);
   assert.equal(truncated, 'a'.repeat(MAX_EMAIL_LENGTH));
 });
+
+test('cleanName strips ASCII null and DEL control characters', () => {
+  const cleaned = cleanName('Jane\x00\x7fDoe');
+  assert.equal(cleaned, 'JaneDoe');
+});
