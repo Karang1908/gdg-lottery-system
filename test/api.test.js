@@ -363,3 +363,14 @@ test('POST /api/admin setCountdown rejects countdowns under two seconds into fut
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'COUNTDOWN_INVALID');
 });
+
+test('POST /api/admin setCountdown rejects countdowns exceeding 90 days', async () => {
+  const farFuture = Date.now() + 95 * 24 * 60 * 60 * 1000;
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'setCountdown', endsAt: farFuture },
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'COUNTDOWN_INVALID');
+});
