@@ -97,3 +97,8 @@ State updates in serverless environments are coordinated through distributed loc
 - All mutations acquire an Upstash Redis lock before reading and writing state.
 - Lock timeout safety net of 8,000ms prevents orphaned locks from deadlocking draws.
 - Short polling allows horizontal function scaling without requiring stateful websocket servers.
+
+## Disaster Recovery & Failover
+
+- If an operator tab crashes or refreshes during a live draw, state is rehydrated from Upstash Redis on reload.
+- The active winner and remaining eligible pool are restored identically on all screens.
