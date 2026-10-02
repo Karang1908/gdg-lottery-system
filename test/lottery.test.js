@@ -620,3 +620,11 @@ test('validEmail rejects strings missing at sign', () => {
   assert.equal(validEmail('plainaddress.com'), false);
   assert.equal(validEmail('invalid.address'), false);
 });
+
+test('createState returns fresh independent state objects', () => {
+  const s1 = createState();
+  const s2 = createState();
+  assert.notEqual(s1, s2);
+  assert.notEqual(s1.entries, s2.entries);
+  assert.notEqual(s1.history, s2.history);
+});
