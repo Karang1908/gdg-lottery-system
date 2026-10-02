@@ -1,5 +1,7 @@
 """Bounded browser smoke/visual check for the local lottery preview.
 
+Usage: python scripts/visual_check.py [BASE_URL] [ADMIN_PASSWORD] [OUTPUT_DIR]
+
 Requires Python Playwright and a locally running server. This script does not run
 during deployment; it is a maintainer convenience for checking both live flows.
 """
