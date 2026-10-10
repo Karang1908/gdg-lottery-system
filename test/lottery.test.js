@@ -812,3 +812,9 @@ test('normalizeState provides default empty history array if missing', () => {
   assert.ok(Array.isArray(normalized.history));
   assert.equal(normalized.history.length, 0);
 });
+
+test('normalizeState resets null or non-string winnerId to null', () => {
+  const raw = { version: 1, winnerId: 12345 };
+  const normalized = normalizeState(raw);
+  assert.equal(normalized.winnerId, null);
+});
