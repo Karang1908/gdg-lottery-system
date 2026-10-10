@@ -644,3 +644,8 @@ test('adminView deep-copies entries array', () => {
   view.entries[0].name = 'Mutated';
   assert.equal(state.entries[0].name, 'User 1');
 });
+
+test('cleanName collapses multiple contiguous whitespace characters', () => {
+  assert.equal(cleanName('John    Doe'), 'John Doe');
+  assert.equal(cleanName('Alice   B.   Smith'), 'Alice B. Smith');
+});
