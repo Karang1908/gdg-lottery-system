@@ -15,3 +15,10 @@ Commits must adhere to Conventional Commits format:
 - `test(scope)`: Unit or integration test coverage
 - `refactor(scope)`: Code changes neither fixing bugs nor adding features
 - `chore(scope)`: Build tooling, dependency, or configuration updates
+
+## Pull Request Checklist
+Before submitting a PR:
+- [ ] Run `npm run check` to confirm syntax passes without errors.
+- [ ] Run `npm test` to ensure all unit and integration tests pass.
+- [ ] Add new test cases for any new functionality or bug fixes.
+- [ ] Verify that `npm run build` successfully produces minified assets.
