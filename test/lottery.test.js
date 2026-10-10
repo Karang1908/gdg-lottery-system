@@ -818,3 +818,9 @@ test('normalizeState resets null or non-string winnerId to null', () => {
   const normalized = normalizeState(raw);
   assert.equal(normalized.winnerId, null);
 });
+
+test('normalizeState resets non-string countdownEndsAt to null', () => {
+  const raw = { version: 1, countdownEndsAt: 12345 };
+  const normalized = normalizeState(raw);
+  assert.equal(normalized.countdownEndsAt, null);
+});
