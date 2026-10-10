@@ -835,3 +835,8 @@ test('createState sets default empty winnerId', () => {
   const state = createState();
   assert.equal(state.winnerId, null);
 });
+
+test('createState sets default null countdownEndsAt', () => {
+  const state = createState();
+  assert.equal(state.countdownEndsAt, null);
+});
