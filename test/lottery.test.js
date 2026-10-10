@@ -662,3 +662,7 @@ test('cleanName trims leading and trailing carriage returns', () => {
 test('cleanName strips control tab and newline characters', () => {
   assert.equal(cleanName('\tTaylor\tSwift\n'), 'TaylorSwift');
 });
+
+test('cleanName preserves multi-word names with apostrophes and hyphens', () => {
+  assert.equal(cleanName("Mary-Jane O'Connor"), "Mary-Jane O'Connor");
+});
