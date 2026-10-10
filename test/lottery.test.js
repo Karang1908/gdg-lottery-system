@@ -755,3 +755,12 @@ test('publicView sets winner to null when winnerId is null', () => {
   const view = publicView(state);
   assert.equal(view.winner, null);
 });
+
+test('publicView formats winner object with only id and name', () => {
+  const state = createState();
+  state.entries.push({ id: 'winner-123', name: 'Lucky Winner', email: 'secret@email.com', joinedAt: '2026-10-10', selectedAt: '2026-10-10' });
+  state.winnerId = 'winner-123';
+  const view = publicView(state);
+  assert.deepEqual(view.winner, { id: 'winner-123', name: 'Lucky Winner' });
+  assert.equal(view.winner.email, undefined);
+});
