@@ -747,3 +747,11 @@ test('publicView handles empty entries list correctly', () => {
   assert.equal(view.winner, null);
   assert.deepEqual(view.history, []);
 });
+
+test('publicView sets winner to null when winnerId is null', () => {
+  const state = createState();
+  state.entries.push({ id: 'entry-1', name: 'Winner', email: 'w@example.com', joinedAt: '2026-10-10', selectedAt: null });
+  state.winnerId = null;
+  const view = publicView(state);
+  assert.equal(view.winner, null);
+});
