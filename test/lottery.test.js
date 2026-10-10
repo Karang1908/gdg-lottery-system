@@ -710,3 +710,8 @@ test('passwordMatches returns false when given password has different length', (
   assert.equal(passwordMatches('short'), false);
   assert.equal(passwordMatches('supersecretpasslonger'), false);
 });
+
+test('passwordMatches returns false when given password is null', () => {
+  process.env.ADMIN_PASSWORD = 'secretpassword';
+  assert.equal(passwordMatches(null), false);
+});
