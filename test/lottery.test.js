@@ -720,3 +720,8 @@ test('passwordMatches returns false when given password is undefined', () => {
   process.env.ADMIN_PASSWORD = 'secretpassword';
   assert.equal(passwordMatches(undefined), false);
 });
+
+test('passwordMatches returns true when password strictly matches', () => {
+  process.env.ADMIN_PASSWORD = 'exact-match-token-123';
+  assert.equal(passwordMatches('exact-match-token-123'), true);
+});
