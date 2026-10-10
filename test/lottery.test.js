@@ -824,3 +824,9 @@ test('normalizeState resets non-string countdownEndsAt to null', () => {
   const normalized = normalizeState(raw);
   assert.equal(normalized.countdownEndsAt, null);
 });
+
+test('normalizeState defaults revision counter to 0 on legacy state', () => {
+  const raw = { version: 1 };
+  const normalized = normalizeState(raw);
+  assert.equal(normalized.revision, 0);
+});
