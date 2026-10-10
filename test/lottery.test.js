@@ -733,3 +733,8 @@ test('requireAdmin throws AppError UNAUTHORIZED on password mismatch', () => {
     (err) => err instanceof AppError && err.status === 401 && err.code === 'UNAUTHORIZED'
   );
 });
+
+test('requireAdmin does not throw when password matches configured secret', () => {
+  process.env.ADMIN_PASSWORD = 'valid-configured-secret';
+  assert.doesNotThrow(() => requireAdmin('valid-configured-secret'));
+});
