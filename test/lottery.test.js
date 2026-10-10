@@ -649,3 +649,8 @@ test('cleanName collapses multiple contiguous whitespace characters', () => {
   assert.equal(cleanName('John    Doe'), 'John Doe');
   assert.equal(cleanName('Alice   B.   Smith'), 'Alice B. Smith');
 });
+
+test('cleanName strips non-printable ASCII characters', () => {
+  assert.equal(cleanName('Jane\x00\x07Doe'), 'JaneDoe');
+  assert.equal(cleanName('\x1bKaran\x1b'), 'Karan');
+});
