@@ -790,3 +790,11 @@ test('adminView preserves entry joinedAt and selectedAt properties', () => {
   assert.equal(view.entries[0].joinedAt, '2026-10-10T10:00:00Z');
   assert.equal(view.entries[0].selectedAt, '2026-10-10T10:05:00Z');
 });
+
+test('adminView mutations do not affect internal state array', () => {
+  const state = createState();
+  state.entries.push({ id: 'e-1', name: 'Initial', email: 'test@example.com', joinedAt: '2026-10-10', selectedAt: null });
+  const view = adminView(state);
+  view.entries[0].name = 'Tampered';
+  assert.equal(state.entries[0].name, 'Initial');
+});
