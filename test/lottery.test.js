@@ -798,3 +798,10 @@ test('adminView mutations do not affect internal state array', () => {
   view.entries[0].name = 'Tampered';
   assert.equal(state.entries[0].name, 'Initial');
 });
+
+test('normalizeState provides default empty entries array if missing', () => {
+  const raw = { version: 1, revision: 1 };
+  const normalized = normalizeState(raw);
+  assert.ok(Array.isArray(normalized.entries));
+  assert.equal(normalized.entries.length, 0);
+});
