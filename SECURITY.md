@@ -5,3 +5,6 @@ If you discover a security vulnerability within the GDG Persistent Lottery Syste
 
 ## Threat Model
 The system is designed for live presentation settings where the operator display is exposed to an audience, while entrant phones connect over shared event Wi-Fi.
+
+## Timing-Attack Defenses
+The administrative console requires an `ADMIN_PASSWORD`. Verification uses `crypto.timingSafeEqual` across identical buffer lengths to prevent timing attacks from leaking password length or characters via execution latency.
