@@ -682,3 +682,8 @@ test('cleanEmail preserves plus-addressing tags', () => {
 test('cleanEmail handles standard corporate domain addresses', () => {
   assert.equal(cleanEmail('alex.engineer@google.com'), 'alex.engineer@google.com');
 });
+
+test('validEmail accepts standard two-part domain names', () => {
+  assert.equal(validEmail('test@sub.example.com'), true);
+  assert.equal(validEmail('user@mail.co.uk'), true);
+});
