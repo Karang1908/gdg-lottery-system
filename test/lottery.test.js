@@ -863,3 +863,8 @@ test('AppError toString formats error message correctly', () => {
   const err = new AppError('Custom error message');
   assert.ok(err.toString().includes('Custom error message'));
 });
+
+test('withLocalLock returns result of synchronous callback', async () => {
+  const val = await withLocalLock(() => 42);
+  assert.equal(val, 42);
+});
