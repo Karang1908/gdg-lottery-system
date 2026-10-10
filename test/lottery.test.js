@@ -840,3 +840,8 @@ test('createState sets default null countdownEndsAt', () => {
   const state = createState();
   assert.equal(state.countdownEndsAt, null);
 });
+
+test('createState sets valid ISO string for updatedAt', () => {
+  const state = createState();
+  assert.ok(!Number.isNaN(Date.parse(state.updatedAt)));
+});
