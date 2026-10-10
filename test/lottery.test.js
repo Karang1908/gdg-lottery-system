@@ -674,3 +674,7 @@ test('cleanEmail strips spaces around username and domain', () => {
 test('cleanEmail converts uppercase characters to lowercase', () => {
   assert.equal(cleanEmail('FIRST.LAST@CORP.EXAMPLE.COM'), 'first.last@corp.example.com');
 });
+
+test('cleanEmail preserves plus-addressing tags', () => {
+  assert.equal(cleanEmail('dev+lottery@gmail.com'), 'dev+lottery@gmail.com');
+});
