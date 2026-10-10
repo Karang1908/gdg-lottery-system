@@ -26,3 +26,8 @@ The frontend client uses adaptive short-polling against `/api/state`. When polli
 
 ## Atomic Mutation and Local Mutex Locking
 Mutations to the lottery roster (joins, draws, advance, returns) are serialized through an asynchronous promise queue (`withLocalLock`). This guarantees that concurrent entrant submissions never produce race conditions or overwrite each other in single-process or development mode.
+
+## Dual-Store Persistence Abstraction
+The system seamlessly toggles between two persistence layers:
+1. **Upstash Redis REST API**: Used in serverless environments (e.g. Vercel) where local filesystems are ephemeral.
+2. **Local JSON State File**: Used in local development and offline event environments, persisting state across server restarts to a single JSON document.
