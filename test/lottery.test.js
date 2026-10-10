@@ -691,3 +691,7 @@ test('validEmail accepts standard two-part domain names', () => {
 test('validEmail accepts alphanumeric local parts with periods', () => {
   assert.equal(validEmail('karan.garg.1908@example.org'), true);
 });
+
+test('validEmail rejects email with missing local-part', () => {
+  assert.equal(validEmail('@example.com'), false);
+});
