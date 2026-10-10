@@ -805,3 +805,10 @@ test('normalizeState provides default empty entries array if missing', () => {
   assert.ok(Array.isArray(normalized.entries));
   assert.equal(normalized.entries.length, 0);
 });
+
+test('normalizeState provides default empty history array if missing', () => {
+  const raw = { version: 1, revision: 1 };
+  const normalized = normalizeState(raw);
+  assert.ok(Array.isArray(normalized.history));
+  assert.equal(normalized.history.length, 0);
+});
