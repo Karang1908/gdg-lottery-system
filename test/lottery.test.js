@@ -764,3 +764,13 @@ test('publicView formats winner object with only id and name', () => {
   assert.deepEqual(view.winner, { id: 'winner-123', name: 'Lucky Winner' });
   assert.equal(view.winner.email, undefined);
 });
+
+test('publicView limits history output to top 8 items', () => {
+  const state = createState();
+  for (let i = 0; i < 20; i++) {
+    state.history.push({ id: `h-${i}`, entryId: `e-${i}`, name: `Name ${i}`, drawnAt: '2026-10-10' });
+  }
+  const view = publicView(state);
+  assert.equal(view.history.length, 8);
+  assert.equal(view.history[0].id, 'h-0');
+});
