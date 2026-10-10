@@ -666,3 +666,7 @@ test('cleanName strips control tab and newline characters', () => {
 test('cleanName preserves multi-word names with apostrophes and hyphens', () => {
   assert.equal(cleanName("Mary-Jane O'Connor"), "Mary-Jane O'Connor");
 });
+
+test('cleanEmail strips spaces around username and domain', () => {
+  assert.equal(cleanEmail('  user@domain.com  '), 'user@domain.com');
+});
