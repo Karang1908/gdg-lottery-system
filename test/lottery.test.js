@@ -670,3 +670,7 @@ test('cleanName preserves multi-word names with apostrophes and hyphens', () => 
 test('cleanEmail strips spaces around username and domain', () => {
   assert.equal(cleanEmail('  user@domain.com  '), 'user@domain.com');
 });
+
+test('cleanEmail converts uppercase characters to lowercase', () => {
+  assert.equal(cleanEmail('FIRST.LAST@CORP.EXAMPLE.COM'), 'first.last@corp.example.com');
+});
