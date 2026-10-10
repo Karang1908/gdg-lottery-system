@@ -830,3 +830,8 @@ test('normalizeState defaults revision counter to 0 on legacy state', () => {
   const normalized = normalizeState(raw);
   assert.equal(normalized.revision, 0);
 });
+
+test('createState sets default empty winnerId', () => {
+  const state = createState();
+  assert.equal(state.winnerId, null);
+});
