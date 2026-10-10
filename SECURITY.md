@@ -8,3 +8,8 @@ The system is designed for live presentation settings where the operator display
 
 ## Timing-Attack Defenses
 The administrative console requires an `ADMIN_PASSWORD`. Verification uses `crypto.timingSafeEqual` across identical buffer lengths to prevent timing attacks from leaking password length or characters via execution latency.
+
+## HTTP Header Hardening
+- `x-powered-by` is explicitly disabled on Express to reduce server fingerprinting.
+- All dynamic API endpoints set `Cache-Control: private, no-store, max-age=0` to prevent intermediate proxies or shared browser caches from storing entrant data.
+- Static assets in `dist/` are served with immutable caching using sha256 content hashes.
