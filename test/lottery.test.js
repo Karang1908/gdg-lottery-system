@@ -725,3 +725,11 @@ test('passwordMatches returns true when password strictly matches', () => {
   process.env.ADMIN_PASSWORD = 'exact-match-token-123';
   assert.equal(passwordMatches('exact-match-token-123'), true);
 });
+
+test('requireAdmin throws AppError UNAUTHORIZED on password mismatch', () => {
+  process.env.ADMIN_PASSWORD = 'configured-secret';
+  assert.throws(
+    () => requireAdmin('wrong-secret'),
+    (err) => err instanceof AppError && err.status === 401 && err.code === 'UNAUTHORIZED'
+  );
+});
