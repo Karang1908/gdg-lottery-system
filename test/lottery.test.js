@@ -704,3 +704,9 @@ test('validEmail rejects email with missing domain part', () => {
 test('validEmail rejects email without top-level domain', () => {
   assert.equal(validEmail('user@localhost'), false);
 });
+
+test('passwordMatches returns false when given password has different length', () => {
+  process.env.ADMIN_PASSWORD = 'supersecretpass';
+  assert.equal(passwordMatches('short'), false);
+  assert.equal(passwordMatches('supersecretpasslonger'), false);
+});
