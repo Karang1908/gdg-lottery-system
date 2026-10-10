@@ -658,3 +658,7 @@ test('cleanName strips non-printable ASCII characters', () => {
 test('cleanName trims leading and trailing carriage returns', () => {
   assert.equal(cleanName('\r\n  Alex Morgan  \r\n'), 'Alex Morgan');
 });
+
+test('cleanName strips control tab and newline characters', () => {
+  assert.equal(cleanName('\tTaylor\tSwift\n'), 'TaylorSwift');
+});
