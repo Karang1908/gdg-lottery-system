@@ -738,3 +738,12 @@ test('requireAdmin does not throw when password matches configured secret', () =
   process.env.ADMIN_PASSWORD = 'valid-configured-secret';
   assert.doesNotThrow(() => requireAdmin('valid-configured-secret'));
 });
+
+test('publicView handles empty entries list correctly', () => {
+  const state = createState();
+  const view = publicView(state);
+  assert.equal(view.totalCount, 0);
+  assert.equal(view.eligibleCount, 0);
+  assert.equal(view.winner, null);
+  assert.deepEqual(view.history, []);
+});
