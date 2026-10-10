@@ -715,3 +715,8 @@ test('passwordMatches returns false when given password is null', () => {
   process.env.ADMIN_PASSWORD = 'secretpassword';
   assert.equal(passwordMatches(null), false);
 });
+
+test('passwordMatches returns false when given password is undefined', () => {
+  process.env.ADMIN_PASSWORD = 'secretpassword';
+  assert.equal(passwordMatches(undefined), false);
+});
