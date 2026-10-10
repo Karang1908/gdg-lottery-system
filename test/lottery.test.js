@@ -700,3 +700,7 @@ test('validEmail rejects email with missing local-part', () => {
 test('validEmail rejects email with missing domain part', () => {
   assert.equal(validEmail('user@'), false);
 });
+
+test('validEmail rejects email without top-level domain', () => {
+  assert.equal(validEmail('user@localhost'), false);
+});
