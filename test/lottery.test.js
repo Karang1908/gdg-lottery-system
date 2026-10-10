@@ -845,3 +845,10 @@ test('createState sets valid ISO string for updatedAt', () => {
   const state = createState();
   assert.ok(!Number.isNaN(Date.parse(state.updatedAt)));
 });
+
+test('AppError captures http status code and machine error code', () => {
+  const err = new AppError('Resource missing', 404, 'NOT_FOUND');
+  assert.equal(err.message, 'Resource missing');
+  assert.equal(err.status, 404);
+  assert.equal(err.code, 'NOT_FOUND');
+});
