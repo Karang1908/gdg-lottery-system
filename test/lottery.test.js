@@ -782,3 +782,11 @@ test('adminView returns all entries with their original emails', () => {
   assert.equal(view.entries.length, 1);
   assert.equal(view.entries[0].email, 'admin-entrant@example.com');
 });
+
+test('adminView preserves entry joinedAt and selectedAt properties', () => {
+  const state = createState();
+  state.entries.push({ id: 'e-1', name: 'Sam', email: 'sam@example.com', joinedAt: '2026-10-10T10:00:00Z', selectedAt: '2026-10-10T10:05:00Z' });
+  const view = adminView(state);
+  assert.equal(view.entries[0].joinedAt, '2026-10-10T10:00:00Z');
+  assert.equal(view.entries[0].selectedAt, '2026-10-10T10:05:00Z');
+});
