@@ -13,6 +13,7 @@ const {
   adminView,
   cleanEmail,
   cleanName,
+  passwordMatches,
   validEmail,
   createState,
   joinLottery,
