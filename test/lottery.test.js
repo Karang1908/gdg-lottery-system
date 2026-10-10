@@ -696,3 +696,7 @@ test('validEmail accepts alphanumeric local parts with periods', () => {
 test('validEmail rejects email with missing local-part', () => {
   assert.equal(validEmail('@example.com'), false);
 });
+
+test('validEmail rejects email with missing domain part', () => {
+  assert.equal(validEmail('user@'), false);
+});
