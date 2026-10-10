@@ -852,3 +852,9 @@ test('AppError captures http status code and machine error code', () => {
   assert.equal(err.status, 404);
   assert.equal(err.code, 'NOT_FOUND');
 });
+
+test('AppError inherits from JavaScript Error prototype', () => {
+  const err = new AppError('Oops');
+  assert.ok(err instanceof Error);
+  assert.ok(err instanceof AppError);
+});
