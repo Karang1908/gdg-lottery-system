@@ -20,3 +20,6 @@ The GDG Persistent Lottery System is an event-grade giveaway platform designed f
        | (Upstash / Disk File) |
        +-----------------------+
 ```
+
+## Client-Side Polling and State Reconciliation
+The frontend client uses adaptive short-polling against `/api/state`. When polling returns a state with an identical `revision` number, the DOM reconciliation short-circuits to avoid wasteful re-rendering of the canvas wheel. When revision increments, the client updates entrant counts and current winner display.
