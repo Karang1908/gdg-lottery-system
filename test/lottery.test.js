@@ -858,3 +858,8 @@ test('AppError inherits from JavaScript Error prototype', () => {
   assert.ok(err instanceof Error);
   assert.ok(err instanceof AppError);
 });
+
+test('AppError toString formats error message correctly', () => {
+  const err = new AppError('Custom error message');
+  assert.ok(err.toString().includes('Custom error message'));
+});
