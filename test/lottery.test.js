@@ -678,3 +678,7 @@ test('cleanEmail converts uppercase characters to lowercase', () => {
 test('cleanEmail preserves plus-addressing tags', () => {
   assert.equal(cleanEmail('dev+lottery@gmail.com'), 'dev+lottery@gmail.com');
 });
+
+test('cleanEmail handles standard corporate domain addresses', () => {
+  assert.equal(cleanEmail('alex.engineer@google.com'), 'alex.engineer@google.com');
+});
