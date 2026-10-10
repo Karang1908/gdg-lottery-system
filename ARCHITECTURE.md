@@ -23,3 +23,6 @@ The GDG Persistent Lottery System is an event-grade giveaway platform designed f
 
 ## Client-Side Polling and State Reconciliation
 The frontend client uses adaptive short-polling against `/api/state`. When polling returns a state with an identical `revision` number, the DOM reconciliation short-circuits to avoid wasteful re-rendering of the canvas wheel. When revision increments, the client updates entrant counts and current winner display.
+
+## Atomic Mutation and Local Mutex Locking
+Mutations to the lottery roster (joins, draws, advance, returns) are serialized through an asynchronous promise queue (`withLocalLock`). This guarantees that concurrent entrant submissions never produce race conditions or overwrite each other in single-process or development mode.
