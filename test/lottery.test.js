@@ -774,3 +774,11 @@ test('publicView limits history output to top 8 items', () => {
   assert.equal(view.history.length, 8);
   assert.equal(view.history[0].id, 'h-0');
 });
+
+test('adminView returns all entries with their original emails', () => {
+  const state = createState();
+  state.entries.push({ id: 'admin-e1', name: 'Admin Entrant', email: 'admin-entrant@example.com', joinedAt: '2026-10-10', selectedAt: null });
+  const view = adminView(state);
+  assert.equal(view.entries.length, 1);
+  assert.equal(view.entries[0].email, 'admin-entrant@example.com');
+});
