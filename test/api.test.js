@@ -518,3 +518,11 @@ test('POST /api/join preserves original name on duplicate submission', async () 
   const res = await apiRequest('/api/join', { method: 'POST', body: { name: 'Updated Name', email } });
   assert.equal(res.data.entry.name, 'First Name');
 });
+
+test('POST /api/join response contains valid entrant id UUID format', async () => {
+  const res = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: 'UUID Check', email: `uuid-${Date.now()}@example.com` },
+  });
+  assert.match(res.data.entry.id, /^[0-9a-f-]{36}$/i);
+});
