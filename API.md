@@ -36,3 +36,10 @@ Registers an entrant into the active giveaway.
   - `200 OK`: Entrant previously joined (`alreadyJoined: true`).
   - `400 Bad Request`: Invalid name or email.
   - `409 Conflict`: Event capacity reached (1,000 entries).
+
+### POST /api/admin
+Administrative command interface for operating giveaway flow.
+- **Method**: `POST`
+- **Headers**:
+  - `Content-Type: application/json`
+  - `x-admin-password`: Configured `ADMIN_PASSWORD` secret
