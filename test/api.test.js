@@ -852,3 +852,16 @@ test('POST /api/join enforces request body size limit', async () => {
   });
   assert.ok(res.status === 413 || res.status === 400);
 });
+
+test('POST /api/admin enforces request body size limit', async () => {
+  const payload = { action: 'get', padding: 'X'.repeat(20000) };
+  const res = await fetch(`${baseUrl}/api/admin`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'x-admin-password': 'api-test-password',
+    },
+    body: JSON.stringify(payload),
+  });
+  assert.ok(res.status === 413 || res.status === 400);
+});
