@@ -820,3 +820,8 @@ test('server returns 400 for invalid JSON syntax error', async () => {
   const data = await res.json();
   assert.ok(data.error.includes('JSON'));
 });
+
+test('server sets Cache-Control private no-store headers on all API responses', async () => {
+  const res = await fetch(`${baseUrl}/api/state`);
+  assert.ok(res.headers.get('cache-control').includes('no-store'));
+});
