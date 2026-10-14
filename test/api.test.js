@@ -400,3 +400,9 @@ test('GET /healthz returns 200 without caching headers', async () => {
   const res = await fetch(`${baseUrl}/healthz`);
   assert.equal(res.status, 200);
 });
+
+test('GET /api/state returns valid JSON payload', async () => {
+  const res = await apiRequest('/api/state');
+  assert.equal(res.status, 200);
+  assert.ok(res.data && typeof res.data === 'object');
+});
