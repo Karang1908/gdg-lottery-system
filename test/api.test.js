@@ -879,3 +879,12 @@ test('POST /api/join ignores unexpected extra properties in payload', async () =
   assert.equal(res.status, 201);
   assert.equal(res.data.entry.isAdmin, undefined);
 });
+
+test('POST /api/admin ignores unexpected extra properties in payload', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'get', maliciousFlag: true },
+  });
+  assert.equal(res.status, 200);
+});
