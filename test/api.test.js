@@ -684,3 +684,16 @@ test('POST /api/admin action=return returns 409 when no winner is on stage', asy
   assert.equal(res.status, 409);
   assert.equal(res.data.code, 'NO_WINNER');
 });
+
+test('POST /api/admin action=remove deletes specified entrant by entryId', async () => {
+  const join = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: 'To Be Deleted', email: `tbd-${Date.now()}@example.com` },
+  });
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'remove', entryId: join.data.entry.id },
+  });
+  assert.equal(res.status, 200);
+});
