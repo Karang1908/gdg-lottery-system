@@ -412,3 +412,9 @@ test('GET /api/state contains required revision and updatedAt fields', async () 
   assert.equal(typeof res.data.revision, 'number');
   assert.equal(typeof res.data.updatedAt, 'string');
 });
+
+test('GET /api/state contains eligibleCount and totalCount metrics', async () => {
+  const res = await apiRequest('/api/state');
+  assert.equal(typeof res.data.eligibleCount, 'number');
+  assert.equal(typeof res.data.totalCount, 'number');
+});
