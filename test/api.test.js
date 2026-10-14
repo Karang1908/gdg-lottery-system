@@ -707,3 +707,22 @@ test('POST /api/admin action=remove returns 404 when entryId does not exist', as
   assert.equal(res.status, 404);
   assert.equal(res.data.code, 'ENTRY_NOT_FOUND');
 });
+
+test('POST /api/admin action=remove clears winnerId if deleted entrant was active winner', async () => {
+  const join = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: 'Winner Delete', email: `wd-${Date.now()}@example.com` },
+  });
+  await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'draw' },
+  });
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'remove', entryId: join.data.entry.id },
+  });
+  assert.equal(res.status, 200);
+  assert.equal(res.data.winnerId, null);
+});
