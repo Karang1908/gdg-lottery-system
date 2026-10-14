@@ -51,3 +51,15 @@ Selects an unselected entrant uniformly at random and puts them on stage.
 ```
 - `409 Conflict` (WINNER_ACTIVE): Another winner is already on stage.
 - `409 Conflict` (NO_ELIGIBLE_ENTRIES): No eligible entrants remain.
+
+#### Action: `advance`
+Confirms winner on stage and clears stage for next giveaway.
+```json
+{ "action": "advance" }
+```
+
+#### Action: `return`
+Returns stage winner back to eligible pool and removes from history.
+```json
+{ "action": "return" }
+```
