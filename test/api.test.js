@@ -756,3 +756,14 @@ test('POST /api/admin action=resetAll replaces state with empty initial state', 
   assert.equal(res.data.totalCount, 0);
   assert.equal(res.data.entries.length, 0);
 });
+
+test('POST /api/admin action=setCountdown sets countdownEndsAt ISO timestamp', async () => {
+  const future = Date.now() + 60 * 1000;
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'setCountdown', endsAt: future },
+  });
+  assert.equal(res.status, 200);
+  assert.ok(res.data.countdownEndsAt);
+});
