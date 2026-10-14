@@ -646,3 +646,22 @@ test('POST /api/admin action=advance returns 409 when no winner is on stage', as
   assert.equal(res.status, 409);
   assert.equal(res.data.code, 'NO_WINNER');
 });
+
+test('POST /api/admin action=return clears winnerId and restores pool eligibility', async () => {
+  await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: 'Returnable', email: `returnable-${Date.now()}@example.com` },
+  });
+  await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'draw' },
+  });
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'return' },
+  });
+  assert.equal(res.status, 200);
+  assert.equal(res.data.winnerId, null);
+});
