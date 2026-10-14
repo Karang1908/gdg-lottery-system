@@ -830,3 +830,9 @@ test('server response headers exclude x-powered-by header', async () => {
   const res = await fetch(`${baseUrl}/healthz`);
   assert.equal(res.headers.get('x-powered-by'), null);
 });
+
+test('static file handler serves admin.html on /admin route', async () => {
+  const res = await fetch(`${baseUrl}/admin`);
+  assert.equal(res.status, 200);
+  assert.ok(res.headers.get('content-type').includes('text/html'));
+});
