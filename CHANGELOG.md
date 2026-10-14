@@ -13,3 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Administrative console with live entrant roster and draw controls.
 - Real-time countdown timer synchronized across all connected displays.
 - Content-hashed static asset production bundler powered by esbuild.
+
+### Testing & Verification
+- Unit test suite covering domain validations, entrant sanitization, and state normalization.
+- HTTP integration tests verifying Express API routing, headers, and error handling.
+- Concurrency test simulating 175 simultaneous entrant registrations.
