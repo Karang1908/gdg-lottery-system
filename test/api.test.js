@@ -495,3 +495,11 @@ test('POST /api/join successfully registers fresh user with 201 status', async (
   assert.equal(res.status, 201);
   assert.equal(res.data.alreadyJoined, false);
 });
+
+test('POST /api/join returns 200 with alreadyJoined=true for duplicate submission', async () => {
+  const email = `dup-${Date.now()}@example.com`;
+  await apiRequest('/api/join', { method: 'POST', body: { name: 'Initial Name', email } });
+  const res = await apiRequest('/api/join', { method: 'POST', body: { name: 'Second Attempt', email } });
+  assert.equal(res.status, 200);
+  assert.equal(res.data.alreadyJoined, true);
+});
