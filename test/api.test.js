@@ -607,3 +607,12 @@ test('POST /api/admin action=draw selects winner and updates winnerId', async ()
   assert.equal(res.status, 200);
   assert.ok(res.data.winnerId);
 });
+
+test('POST /api/admin action=draw records selection in history log', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'get' },
+  });
+  assert.ok(res.data.history.length > 0);
+});
