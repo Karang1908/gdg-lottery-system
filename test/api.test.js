@@ -511,3 +511,10 @@ test('POST /api/join duplicate check is case-insensitive for email address', asy
   assert.equal(res.status, 200);
   assert.equal(res.data.alreadyJoined, true);
 });
+
+test('POST /api/join preserves original name on duplicate submission', async () => {
+  const email = `preserve-${Date.now()}@example.com`;
+  await apiRequest('/api/join', { method: 'POST', body: { name: 'First Name', email } });
+  const res = await apiRequest('/api/join', { method: 'POST', body: { name: 'Updated Name', email } });
+  assert.equal(res.data.entry.name, 'First Name');
+});
