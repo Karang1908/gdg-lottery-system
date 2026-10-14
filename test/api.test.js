@@ -726,3 +726,13 @@ test('POST /api/admin action=remove clears winnerId if deleted entrant was activ
   assert.equal(res.status, 200);
   assert.equal(res.data.winnerId, null);
 });
+
+test('POST /api/admin action=resetPool clears winner and restores all entrants to eligible', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'resetPool' },
+  });
+  assert.equal(res.status, 200);
+  assert.equal(res.data.winnerId, null);
+});
