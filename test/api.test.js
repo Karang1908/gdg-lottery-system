@@ -789,3 +789,13 @@ test('POST /api/admin action=setCountdown rejects timestamp more than 90 days in
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'COUNTDOWN_INVALID');
 });
+
+test('POST /api/admin action=cancelCountdown clears active countdown', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'cancelCountdown' },
+  });
+  assert.equal(res.status, 200);
+  assert.equal(res.data.countdownEndsAt, null);
+});
