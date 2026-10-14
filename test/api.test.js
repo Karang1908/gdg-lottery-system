@@ -804,3 +804,8 @@ test('test(api): verify server handles unsupported HTTP methods gracefully', asy
   const res = await fetch(`${baseUrl}/api/join`, { method: 'DELETE' });
   assert.ok(res.status === 404 || res.status === 405);
 });
+
+test('server returns 404 for unknown API routes', async () => {
+  const res = await fetch(`${baseUrl}/api/invalid-route`);
+  assert.equal(res.status, 404);
+});
