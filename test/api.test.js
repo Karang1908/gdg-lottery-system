@@ -593,3 +593,17 @@ test('POST /api/admin action=draw returns 409 when entries pool is empty', async
   assert.equal(res.status, 409);
   assert.equal(res.data.code, 'NO_ELIGIBLE_ENTRIES');
 });
+
+test('POST /api/admin action=draw selects winner and updates winnerId', async () => {
+  await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: 'Draw Target', email: `draw-${Date.now()}@example.com` },
+  });
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'draw' },
+  });
+  assert.equal(res.status, 200);
+  assert.ok(res.data.winnerId);
+});
