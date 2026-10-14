@@ -390,3 +390,8 @@ test('POST /api/admin cancelCountdown clears active countdown schedule', async (
   assert.equal(cancelRes.status, 200);
   assert.equal(cancelRes.data.countdownEndsAt, null);
 });
+
+test('GET /healthz response headers contain text/plain content type', async () => {
+  const res = await fetch(`${baseUrl}/healthz`);
+  assert.ok(res.headers.get('content-type').includes('text/plain'));
+});
