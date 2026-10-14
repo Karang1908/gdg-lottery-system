@@ -11,3 +11,6 @@ The application includes a `vercel.json` configuration that builds and routes fr
 3. Configure the following environment variables in your Vercel Project Settings:
    - `KV_REST_API_URL` (or `UPSTASH_REDIS_REST_URL`)
    - `KV_REST_API_TOKEN` (or `UPSTASH_REDIS_REST_TOKEN`)
+
+## Local File-Backed Development
+When running locally via `npm run dev`, if Redis environment variables are absent, the system defaults to persisting state to `.lottery-state.json` in the project root. This file is git-ignored to prevent committing event attendee data.
