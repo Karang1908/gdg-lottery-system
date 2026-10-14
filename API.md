@@ -19,3 +19,20 @@ Returns public lottery status, entrant counts, winner on stage, and recent histo
 - **Query Parameters**:
   - `admin` (optional, "1"): If set, returns complete administrative view. Requires `x-admin-password` header.
 - **Response**: `200 OK` application/json
+
+### POST /api/join
+Registers an entrant into the active giveaway.
+- **Method**: `POST`
+- **Headers**: `Content-Type: application/json`
+- **Body**:
+  ```json
+  {
+    "name": "Jane Doe",
+    "email": "jane@example.com"
+  }
+  ```
+- **Status Codes**:
+  - `201 Created`: Fresh registration created.
+  - `200 OK`: Entrant previously joined (`alreadyJoined: true`).
+  - `400 Bad Request`: Invalid name or email.
+  - `409 Conflict`: Event capacity reached (1,000 entries).
