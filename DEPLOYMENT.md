@@ -20,3 +20,6 @@ When running locally via `npm run dev`, if Redis environment variables are absen
 - [ ] `KV_REST_API_URL`: Upstash or Vercel KV REST URL.
 - [ ] `KV_REST_API_TOKEN`: Upstash or Vercel KV REST bearer token.
 - [ ] `PORT`: Optional HTTP listening port (defaults to 3000).
+
+## Zero-Downtime Deployments
+Because static assets are built with content hashes and state is stored externally in Redis, new builds can be deployed mid-event without disconnecting active audience phones or losing lottery entrant records.
