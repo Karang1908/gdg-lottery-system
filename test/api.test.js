@@ -865,3 +865,17 @@ test('POST /api/admin enforces request body size limit', async () => {
   });
   assert.ok(res.status === 413 || res.status === 400);
 });
+
+test('POST /api/join ignores unexpected extra properties in payload', async () => {
+  const res = await apiRequest('/api/join', {
+    method: 'POST',
+    body: {
+      name: 'Safe Entrant',
+      email: `safe-${Date.now()}@example.com`,
+      isAdmin: true,
+      role: 'superuser',
+    },
+  });
+  assert.equal(res.status, 201);
+  assert.equal(res.data.entry.isAdmin, undefined);
+});
