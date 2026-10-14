@@ -697,3 +697,13 @@ test('POST /api/admin action=remove deletes specified entrant by entryId', async
   });
   assert.equal(res.status, 200);
 });
+
+test('POST /api/admin action=remove returns 404 when entryId does not exist', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'remove', entryId: 'non-existent-uuid-1234' },
+  });
+  assert.equal(res.status, 404);
+  assert.equal(res.data.code, 'ENTRY_NOT_FOUND');
+});
