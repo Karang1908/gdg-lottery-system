@@ -4,3 +4,12 @@ All notable changes to the GDG Persistent Lottery System will be documented in t
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.0.0] - 2026-10-14
+### Added
+- Persistent lottery engine with Upstash Redis and local JSON state storage.
+- Interactive HTML5 Canvas spinning wheel with physics-based deceleration.
+- Mobile-first responsive registration page for audience entrants.
+- Administrative console with live entrant roster and draw controls.
+- Real-time countdown timer synchronized across all connected displays.
+- Content-hashed static asset production bundler powered by esbuild.
