@@ -503,3 +503,11 @@ test('POST /api/join returns 200 with alreadyJoined=true for duplicate submissio
   assert.equal(res.status, 200);
   assert.equal(res.data.alreadyJoined, true);
 });
+
+test('POST /api/join duplicate check is case-insensitive for email address', async () => {
+  const baseEmail = `case-${Date.now()}@example.com`;
+  await apiRequest('/api/join', { method: 'POST', body: { name: 'Case User', email: baseEmail.toLowerCase() } });
+  const res = await apiRequest('/api/join', { method: 'POST', body: { name: 'Case User', email: baseEmail.toUpperCase() } });
+  assert.equal(res.status, 200);
+  assert.equal(res.data.alreadyJoined, true);
+});
