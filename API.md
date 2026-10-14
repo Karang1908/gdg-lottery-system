@@ -43,3 +43,11 @@ Administrative command interface for operating giveaway flow.
 - **Headers**:
   - `Content-Type: application/json`
   - `x-admin-password`: Configured `ADMIN_PASSWORD` secret
+
+#### Action: `draw`
+Selects an unselected entrant uniformly at random and puts them on stage.
+```json
+{ "action": "draw" }
+```
+- `409 Conflict` (WINNER_ACTIVE): Another winner is already on stage.
+- `409 Conflict` (NO_ELIGIBLE_ENTRIES): No eligible entrants remain.
