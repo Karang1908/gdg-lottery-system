@@ -809,3 +809,14 @@ test('server returns 404 for unknown API routes', async () => {
   const res = await fetch(`${baseUrl}/api/invalid-route`);
   assert.equal(res.status, 404);
 });
+
+test('server returns 400 for invalid JSON syntax error', async () => {
+  const res = await fetch(`${baseUrl}/api/join`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: '{ malformed json ',
+  });
+  assert.equal(res.status, 400);
+  const data = await res.json();
+  assert.ok(data.error.includes('JSON'));
+});
