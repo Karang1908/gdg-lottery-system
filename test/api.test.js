@@ -578,3 +578,18 @@ test('POST /api/admin action=get returns complete administrative view', async ()
   assert.equal(res.status, 200);
   assert.ok(Array.isArray(res.data.entries));
 });
+
+test('POST /api/admin action=draw returns 409 when entries pool is empty', async () => {
+  await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'resetAll' },
+  });
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'draw' },
+  });
+  assert.equal(res.status, 409);
+  assert.equal(res.data.code, 'NO_ELIGIBLE_ENTRIES');
+});
