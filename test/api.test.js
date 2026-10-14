@@ -468,3 +468,12 @@ test('POST /api/join returns 400 when name contains only spaces', async () => {
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'NAME_REQUIRED');
 });
+
+test('POST /api/join returns 400 when email is empty string', async () => {
+  const res = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: 'Valid Name', email: '' },
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'EMAIL_INVALID');
+});
