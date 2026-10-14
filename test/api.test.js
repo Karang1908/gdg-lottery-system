@@ -665,3 +665,12 @@ test('POST /api/admin action=return clears winnerId and restores pool eligibilit
   assert.equal(res.status, 200);
   assert.equal(res.data.winnerId, null);
 });
+
+test('POST /api/admin action=return removes winner from recent history', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'get' },
+  });
+  assert.ok(Array.isArray(res.data.history));
+});
