@@ -418,3 +418,8 @@ test('GET /api/state contains eligibleCount and totalCount metrics', async () =>
   assert.equal(typeof res.data.eligibleCount, 'number');
   assert.equal(typeof res.data.totalCount, 'number');
 });
+
+test('GET /api/state excludes email field from public response', async () => {
+  const res = await apiRequest('/api/state');
+  assert.equal(res.data.entries, undefined);
+});
