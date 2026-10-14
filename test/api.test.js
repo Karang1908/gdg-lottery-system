@@ -486,3 +486,12 @@ test('POST /api/join returns 400 when email is invalid format', async () => {
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'EMAIL_INVALID');
 });
+
+test('POST /api/join successfully registers fresh user with 201 status', async () => {
+  const res = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: 'Unique User', email: `unique-${Date.now()}@example.com` },
+  });
+  assert.equal(res.status, 201);
+  assert.equal(res.data.alreadyJoined, false);
+});
