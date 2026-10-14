@@ -636,3 +636,13 @@ test('POST /api/admin action=advance clears active winnerId from state', async (
   assert.equal(res.status, 200);
   assert.equal(res.data.winnerId, null);
 });
+
+test('POST /api/admin action=advance returns 409 when no winner is on stage', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'advance' },
+  });
+  assert.equal(res.status, 409);
+  assert.equal(res.data.code, 'NO_WINNER');
+});
