@@ -423,3 +423,9 @@ test('GET /api/state excludes email field from public response', async () => {
   const res = await apiRequest('/api/state');
   assert.equal(res.data.entries, undefined);
 });
+
+test('GET /api/state with admin=1 returns 401 when password missing', async () => {
+  const res = await apiRequest('/api/state?admin=1');
+  assert.equal(res.status, 401);
+  assert.equal(res.data.code, 'UNAUTHORIZED');
+});
