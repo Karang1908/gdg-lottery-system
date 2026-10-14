@@ -87,3 +87,13 @@ Cancels any active countdown schedule.
 ```json
 { "action": "cancelCountdown" }
 ```
+
+## Error Response Structure
+All errors return consistent JSON:
+```json
+{
+  "error": "Human readable explanation.",
+  "code": "MACHINE_READABLE_CODE"
+}
+```
+Common error codes: `NAME_REQUIRED`, `EMAIL_INVALID`, `UNAUTHORIZED`, `LOTTERY_FULL`, `WINNER_ACTIVE`, `NO_WINNER`, `NO_ELIGIBLE_ENTRIES`, `ENTRY_NOT_FOUND`, `COUNTDOWN_INVALID`.
