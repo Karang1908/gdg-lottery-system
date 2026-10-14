@@ -25,3 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added developer contribution guide in `CONTRIBUTING.md`.
 - Added complete REST API reference in `API.md`.
 - Added deployment instructions in `DEPLOYMENT.md`.
+
+### Roadmap
+- WebSockets / Server-Sent Events (SSE) optional live push adapter.
+- Custom event branding themes and logo upload support.
+- Multi-tier prize allocation and raffle categories.
