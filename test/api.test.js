@@ -568,3 +568,13 @@ test('POST /api/admin returns 400 when action field is unknown', async () => {
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'ACTION_INVALID');
 });
+
+test('POST /api/admin action=get returns complete administrative view', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'get' },
+  });
+  assert.equal(res.status, 200);
+  assert.ok(Array.isArray(res.data.entries));
+});
