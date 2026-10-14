@@ -18,3 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Unit test suite covering domain validations, entrant sanitization, and state normalization.
 - HTTP integration tests verifying Express API routing, headers, and error handling.
 - Concurrency test simulating 175 simultaneous entrant registrations.
+
+### Documentation
+- Added system architecture specifications in `ARCHITECTURE.md`.
+- Added security policies and threat model in `SECURITY.md`.
+- Added developer contribution guide in `CONTRIBUTING.md`.
+- Added complete REST API reference in `API.md`.
+- Added deployment instructions in `DEPLOYMENT.md`.
