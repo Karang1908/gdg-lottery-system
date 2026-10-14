@@ -12,3 +12,10 @@ Liveness probe used by container orchestrators and monitoring systems.
 - **Response**: `200 OK`
 - **Content-Type**: `text/plain`
 - **Body**: `ok`
+
+### GET /api/state
+Returns public lottery status, entrant counts, winner on stage, and recent history.
+- **Method**: `GET`
+- **Query Parameters**:
+  - `admin` (optional, "1"): If set, returns complete administrative view. Requires `x-admin-password` header.
+- **Response**: `200 OK` application/json
