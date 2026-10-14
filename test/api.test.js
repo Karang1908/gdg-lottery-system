@@ -534,3 +534,8 @@ test('POST /api/join response contains public state snapshot', async () => {
   });
   assert.ok(res.data.state && typeof res.data.state.eligibleCount === 'number');
 });
+
+test('POST /api/admin requires x-admin-password header', async () => {
+  const res = await apiRequest('/api/admin', { method: 'POST', body: { action: 'get' } });
+  assert.equal(res.status, 401);
+});
