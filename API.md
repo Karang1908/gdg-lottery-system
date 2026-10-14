@@ -63,3 +63,15 @@ Returns stage winner back to eligible pool and removes from history.
 ```json
 { "action": "return" }
 ```
+
+#### Action: `remove`
+Deletes an entrant record by ID.
+```json
+{ "action": "remove", "entryId": "<uuid>" }
+```
+
+#### Action: `resetPool`
+Restores eligibility for all entrants without deleting attendee records.
+```json
+{ "action": "resetPool" }
+```
