@@ -75,3 +75,15 @@ Restores eligibility for all entrants without deleting attendee records.
 ```json
 { "action": "resetPool" }
 ```
+
+#### Action: `setCountdown`
+Sets target countdown timestamp.
+```json
+{ "action": "setCountdown", "endsAt": 1792000000000 }
+```
+
+#### Action: `cancelCountdown`
+Cancels any active countdown schedule.
+```json
+{ "action": "cancelCountdown" }
+```
