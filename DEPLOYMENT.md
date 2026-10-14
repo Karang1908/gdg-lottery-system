@@ -14,3 +14,9 @@ The application includes a `vercel.json` configuration that builds and routes fr
 
 ## Local File-Backed Development
 When running locally via `npm run dev`, if Redis environment variables are absent, the system defaults to persisting state to `.lottery-state.json` in the project root. This file is git-ignored to prevent committing event attendee data.
+
+## Production Environment Variables Checklist
+- [ ] `ADMIN_PASSWORD`: Strong administrative password secret.
+- [ ] `KV_REST_API_URL`: Upstash or Vercel KV REST URL.
+- [ ] `KV_REST_API_TOKEN`: Upstash or Vercel KV REST bearer token.
+- [ ] `PORT`: Optional HTTP listening port (defaults to 3000).
