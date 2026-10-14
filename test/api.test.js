@@ -450,3 +450,12 @@ test('POST /api/join returns 400 when request body is empty object', async () =>
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'NAME_REQUIRED');
 });
+
+test('POST /api/join returns 400 when name is empty string', async () => {
+  const res = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: '', email: 'valid@example.com' },
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'NAME_REQUIRED');
+});
