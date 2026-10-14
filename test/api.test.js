@@ -674,3 +674,13 @@ test('POST /api/admin action=return removes winner from recent history', async (
   });
   assert.ok(Array.isArray(res.data.history));
 });
+
+test('POST /api/admin action=return returns 409 when no winner is on stage', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'return' },
+  });
+  assert.equal(res.status, 409);
+  assert.equal(res.data.code, 'NO_WINNER');
+});
