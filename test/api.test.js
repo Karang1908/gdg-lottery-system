@@ -548,3 +548,13 @@ test('POST /api/admin returns 401 when x-admin-password header is incorrect', as
   });
   assert.equal(res.status, 401);
 });
+
+test('POST /api/admin returns 400 when action field is missing', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: {},
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'ACTION_INVALID');
+});
