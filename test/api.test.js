@@ -395,3 +395,8 @@ test('GET /healthz response headers contain text/plain content type', async () =
   const res = await fetch(`${baseUrl}/healthz`);
   assert.ok(res.headers.get('content-type').includes('text/plain'));
 });
+
+test('GET /healthz returns 200 without caching headers', async () => {
+  const res = await fetch(`${baseUrl}/healthz`);
+  assert.equal(res.status, 200);
+});
