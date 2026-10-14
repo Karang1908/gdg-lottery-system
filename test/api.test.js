@@ -406,3 +406,9 @@ test('GET /api/state returns valid JSON payload', async () => {
   assert.equal(res.status, 200);
   assert.ok(res.data && typeof res.data === 'object');
 });
+
+test('GET /api/state contains required revision and updatedAt fields', async () => {
+  const res = await apiRequest('/api/state');
+  assert.equal(typeof res.data.revision, 'number');
+  assert.equal(typeof res.data.updatedAt, 'string');
+});
