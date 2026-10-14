@@ -436,3 +436,11 @@ test('GET /api/state with admin=1 returns 401 when password incorrect', async ()
   });
   assert.equal(res.status, 401);
 });
+
+test('GET /api/state with admin=1 returns 200 and full entries with correct password', async () => {
+  const res = await apiRequest('/api/state?admin=1', {
+    headers: { 'x-admin-password': 'api-test-password' },
+  });
+  assert.equal(res.status, 200);
+  assert.ok(Array.isArray(res.data.entries));
+});
