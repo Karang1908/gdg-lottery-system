@@ -799,3 +799,8 @@ test('POST /api/admin action=cancelCountdown clears active countdown', async () 
   assert.equal(res.status, 200);
   assert.equal(res.data.countdownEndsAt, null);
 });
+
+test('test(api): verify server handles unsupported HTTP methods gracefully', async () => {
+  const res = await fetch(`${baseUrl}/api/join`, { method: 'DELETE' });
+  assert.ok(res.status === 404 || res.status === 405);
+});
