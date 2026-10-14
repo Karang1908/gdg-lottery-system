@@ -836,3 +836,9 @@ test('static file handler serves admin.html on /admin route', async () => {
   assert.equal(res.status, 200);
   assert.ok(res.headers.get('content-type').includes('text/html'));
 });
+
+test('static file handler serves index.html on root route', async () => {
+  const res = await fetch(`${baseUrl}/`);
+  assert.equal(res.status, 200);
+  assert.ok(res.headers.get('content-type').includes('text/html'));
+});
