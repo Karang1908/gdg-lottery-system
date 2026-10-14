@@ -767,3 +767,14 @@ test('POST /api/admin action=setCountdown sets countdownEndsAt ISO timestamp', a
   assert.equal(res.status, 200);
   assert.ok(res.data.countdownEndsAt);
 });
+
+test('POST /api/admin action=setCountdown rejects timestamp in the past', async () => {
+  const past = Date.now() - 10000;
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'setCountdown', endsAt: past },
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'COUNTDOWN_INVALID');
+});
