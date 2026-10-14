@@ -842,3 +842,13 @@ test('static file handler serves index.html on root route', async () => {
   assert.equal(res.status, 200);
   assert.ok(res.headers.get('content-type').includes('text/html'));
 });
+
+test('POST /api/join enforces request body size limit', async () => {
+  const largeName = 'A'.repeat(20000);
+  const res = await fetch(`${baseUrl}/api/join`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ name: largeName, email: 'big@example.com' }),
+  });
+  assert.ok(res.status === 413 || res.status === 400);
+});
