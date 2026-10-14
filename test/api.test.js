@@ -539,3 +539,12 @@ test('POST /api/admin requires x-admin-password header', async () => {
   const res = await apiRequest('/api/admin', { method: 'POST', body: { action: 'get' } });
   assert.equal(res.status, 401);
 });
+
+test('POST /api/admin returns 401 when x-admin-password header is incorrect', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'invalid-password' },
+    body: { action: 'get' },
+  });
+  assert.equal(res.status, 401);
+});
