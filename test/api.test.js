@@ -558,3 +558,13 @@ test('POST /api/admin returns 400 when action field is missing', async () => {
   assert.equal(res.status, 400);
   assert.equal(res.data.code, 'ACTION_INVALID');
 });
+
+test('POST /api/admin returns 400 when action field is unknown', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'nonExistentAction' },
+  });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'ACTION_INVALID');
+});
