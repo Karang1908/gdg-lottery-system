@@ -745,3 +745,14 @@ test('POST /api/admin action=resetPool clears winner selection history', async (
   });
   assert.deepEqual(res.data.history, []);
 });
+
+test('POST /api/admin action=resetAll replaces state with empty initial state', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'resetAll' },
+  });
+  assert.equal(res.status, 200);
+  assert.equal(res.data.totalCount, 0);
+  assert.equal(res.data.entries.length, 0);
+});
