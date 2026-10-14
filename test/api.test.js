@@ -429,3 +429,10 @@ test('GET /api/state with admin=1 returns 401 when password missing', async () =
   assert.equal(res.status, 401);
   assert.equal(res.data.code, 'UNAUTHORIZED');
 });
+
+test('GET /api/state with admin=1 returns 401 when password incorrect', async () => {
+  const res = await apiRequest('/api/state?admin=1', {
+    headers: { 'x-admin-password': 'wrong-password' },
+  });
+  assert.equal(res.status, 401);
+});
