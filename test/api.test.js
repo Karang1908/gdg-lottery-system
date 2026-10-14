@@ -526,3 +526,11 @@ test('POST /api/join response contains valid entrant id UUID format', async () =
   });
   assert.match(res.data.entry.id, /^[0-9a-f-]{36}$/i);
 });
+
+test('POST /api/join response contains public state snapshot', async () => {
+  const res = await apiRequest('/api/join', {
+    method: 'POST',
+    body: { name: 'Snapshot Check', email: `snap-${Date.now()}@example.com` },
+  });
+  assert.ok(res.data.state && typeof res.data.state.eligibleCount === 'number');
+});
