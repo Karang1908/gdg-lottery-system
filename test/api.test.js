@@ -616,3 +616,13 @@ test('POST /api/admin action=draw records selection in history log', async () =>
   });
   assert.ok(res.data.history.length > 0);
 });
+
+test('POST /api/admin action=draw returns 409 when winner is already on stage', async () => {
+  const res = await apiRequest('/api/admin', {
+    method: 'POST',
+    headers: { 'x-admin-password': 'api-test-password' },
+    body: { action: 'draw' },
+  });
+  assert.equal(res.status, 409);
+  assert.equal(res.data.code, 'WINNER_ACTIVE');
+});
