@@ -444,3 +444,9 @@ test('GET /api/state with admin=1 returns 200 and full entries with correct pass
   assert.equal(res.status, 200);
   assert.ok(Array.isArray(res.data.entries));
 });
+
+test('POST /api/join returns 400 when request body is empty object', async () => {
+  const res = await apiRequest('/api/join', { method: 'POST', body: {} });
+  assert.equal(res.status, 400);
+  assert.equal(res.data.code, 'NAME_REQUIRED');
+});
