@@ -825,3 +825,8 @@ test('server sets Cache-Control private no-store headers on all API responses', 
   const res = await fetch(`${baseUrl}/api/state`);
   assert.ok(res.headers.get('cache-control').includes('no-store'));
 });
+
+test('server response headers exclude x-powered-by header', async () => {
+  const res = await fetch(`${baseUrl}/healthz`);
+  assert.equal(res.headers.get('x-powered-by'), null);
+});
