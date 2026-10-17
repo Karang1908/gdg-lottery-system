@@ -42,6 +42,9 @@
     }
   }
 
+  /**
+   * Clears receipt from memory and local storage when round resets.
+   */
   function clearReceipt() {
     receipt = null;
     try {
