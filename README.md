@@ -137,3 +137,11 @@ The admin console includes a dedicated Presentation Mode designed for screen sha
                                                        v
 [ Operator Console ]  -->  POST /api/admin  --> [ Serverless Function ] --> [ State Mutation ]
 ```
+
+### Granular Test Commands
+```bash
+npm run test:unit     # Unit tests for domain lottery engine
+npm run test:api      # Integration tests for Express REST endpoints
+npm run test:helpers  # Utility helper function validations
+npm run test:build    # Static asset bundler pipeline assertions
+```
