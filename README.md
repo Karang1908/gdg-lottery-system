@@ -1,5 +1,7 @@
 # GDG Persistent Lottery
 
+![Tests Passing](https://img.shields.io/badge/tests-passing-brightgreen) ![Node Version](https://img.shields.io/badge/node-%3E%3D20-blue)
+
 A Vercel-ready lottery for large live events. Entrants submit a name and email,
 their entry persists after they close the tab, and the admin draws from a wheel
 that remains responsive at 150+ people.
