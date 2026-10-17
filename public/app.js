@@ -154,6 +154,7 @@
     }
   }
 
+  // Bind submit event to handle client-side form registration.
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     showError('');
