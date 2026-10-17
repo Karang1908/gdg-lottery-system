@@ -17,3 +17,10 @@ test('hashName generates 8-character sha256 content hashes', () => {
   const hashed = hashName('app.js', content);
   assert.match(hashed, /^app\.[0-9a-f]{8}\.js$/);
 });
+
+test('hashName preserves directory structure and file extension', () => {
+  const content = Buffer.from('body { margin: 0; }');
+  const hashed = hashName('css/sub/style.css', content);
+  assert.ok(hashed.startsWith('css/sub/style.'));
+  assert.ok(hashed.endsWith('.css'));
+});
