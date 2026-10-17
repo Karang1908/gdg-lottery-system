@@ -105,3 +105,6 @@ State updates in serverless environments are coordinated through distributed loc
 
 ## Multi-Device Concurrency & Live Synchronization
 Audience devices poll the `/api/state` endpoint with lightweight HEAD/GET requests. Because the response is stripped of entrant rosters, thousands of attendees can view state updates concurrently with sub-5ms latency without degrading the administrative console.
+
+## Enterprise Data Privacy & Compliance
+Entrant email addresses are strictly scoped to the administrative view. The public API never exposes email strings, preventing scraping or data harvesting by audience attendees on shared Wi-Fi networks.
