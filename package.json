@@ -11,6 +11,7 @@
     "build": "node --check server.js && node --check lib/lottery.js && node build.js",
     "check": "node --check server.js && node --check lib/lottery.js && node --check build.js",
     "test": "node --test",
+    "test:unit": "node --test test/lottery.test.js",
     "clean": "node -e \"fs.rmSync('dist', { recursive: true, force: true })\"",
     "verify": "npm run check && npm test"
   },
