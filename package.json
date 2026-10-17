@@ -13,6 +13,7 @@
     "test": "node --test",
     "test:unit": "node --test test/lottery.test.js",
     "test:api": "node --test test/api.test.js",
+    "test:helpers": "node --test test/helpers.test.js",
     "clean": "node -e \"fs.rmSync('dist', { recursive: true, force: true })\"",
     "verify": "npm run check && npm test"
   },
