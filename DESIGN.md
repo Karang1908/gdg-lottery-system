@@ -92,3 +92,8 @@ or projector environment. Dark mode remains first-class and explicit.
 
 - Wheel canvas renders at crisp internal resolutions on mobile (720x720 internal buffer) and scales via CSS percentages.
 - Retains legibility under video compression and projector optical softness.
+
+## Color Accessibility Contrast Ratios
+The brand palette colors (#4285f4, #ea4335, #fbbc04, #34a853) are paired with contrasting typography fills:
+- Dark theme wedges utilize dark label ink (#0b0f19) over light tones and light ink (#f8f9fa) over saturated tones to satisfy WCAG AA 4.5:1 text contrast ratios.
+- Button controls feature minimum 3:1 focus ring boundaries against dark container backgrounds.
