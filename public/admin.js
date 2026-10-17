@@ -333,6 +333,7 @@
   drawButton.addEventListener('click', drawWinner);
   // Clears active winner and opens stage for subsequent draw.
   advanceButton.addEventListener('click', () => runAndRender('advance'));
+  // Restores current stage winner back to eligible drawing pool.
   returnButton.addEventListener('click', () =>
     runAndRender('return', 'The winner is eligible again.')
   );
