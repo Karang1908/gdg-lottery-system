@@ -28,3 +28,9 @@ test('hashName preserves directory structure and file extension', () => {
 test('EXCLUDE set contains unreferenced assets', () => {
   assert.ok(EXCLUDE.has('assets/gdg-logo.png'));
 });
+
+test('kb formats byte sizes with one decimal precision', () => {
+  assert.equal(kb(1024), '1.0 KB');
+  assert.equal(kb(2048), '2.0 KB');
+  assert.equal(kb(1536), '1.5 KB');
+});
