@@ -10,6 +10,7 @@
    * @property {string} hubBorder - Center hub perimeter border color.
    */
 
+  // Official Google Developer Groups quad-color brand palette.
   const BRAND = ['#4285f4', '#ea4335', '#fbbc04', '#34a853'];
   const TWO_PI = Math.PI * 2;
 
