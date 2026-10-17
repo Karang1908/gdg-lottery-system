@@ -329,6 +329,7 @@
     unlock(candidate);
   });
 
+  // Binds operator draw button triggering random entrant selection.
   drawButton.addEventListener('click', drawWinner);
   advanceButton.addEventListener('click', () => runAndRender('advance'));
   returnButton.addEventListener('click', () =>
