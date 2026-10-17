@@ -89,3 +89,18 @@ test('getEligibleCount counts unselected entries correctly', () => {
   };
   assert.equal(count(state), 3);
 });
+
+test('getEligibleCount discounts already selected winners', () => {
+  const count = (state) => {
+    if (!state || !Array.isArray(state.entries)) return 0;
+    return state.entries.reduce((c, e) => c + (e && !e.selectedAt ? 1 : 0), 0);
+  };
+  const state = {
+    entries: [
+      { id: '1', selectedAt: '2026-10-17T10:00:00Z' },
+      { id: '2', selectedAt: null },
+      { id: '3', selectedAt: '2026-10-17T11:00:00Z' },
+    ],
+  };
+  assert.equal(count(state), 1);
+});
