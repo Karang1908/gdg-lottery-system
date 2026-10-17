@@ -31,3 +31,18 @@ test('maskEmail handles short username email addresses', () => {
   assert.equal(mask('me@test.com'), 'm*@test.com');
   assert.equal(mask('a@test.com'), 'a@test.com');
 });
+
+test('maskEmail handles invalid or non-string inputs safely', () => {
+  const mask = (email) => {
+    if (typeof email !== 'string') return '';
+    const at = email.indexOf('@');
+    if (at <= 1) return email;
+    const user = email.slice(0, at);
+    const domain = email.slice(at);
+    if (user.length <= 2) return `${user[0]}*${domain}`;
+    return `${user[0]}${'*'.repeat(user.length - 2)}${user[user.length - 1]}${domain}`;
+  };
+  assert.equal(mask(null), '');
+  assert.equal(mask(undefined), '');
+  assert.equal(mask(12345), '');
+});
