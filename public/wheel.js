@@ -49,6 +49,7 @@
         this.markReady = true;
         this.draw();
       };
+      // Center hub brand badge graphic.
       this.mark.src = '/assets/gdg-mark.png';
 
       canvas.addEventListener('pointermove', (event) => this.onPointerMove(event));
