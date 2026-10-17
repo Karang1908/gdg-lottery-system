@@ -24,3 +24,7 @@ test('hashName preserves directory structure and file extension', () => {
   assert.ok(hashed.startsWith('css/sub/style.'));
   assert.ok(hashed.endsWith('.css'));
 });
+
+test('EXCLUDE set contains unreferenced assets', () => {
+  assert.ok(EXCLUDE.has('assets/gdg-logo.png'));
+});
