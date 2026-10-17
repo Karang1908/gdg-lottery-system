@@ -1820,3 +1820,10 @@ body.is-presenting .btn-draw {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+
+/* High contrast accessibility adjustments */
+@media (forced-colors: active) {
+  .btn {
+    border: 1px solid ButtonText;
+  }
+}
