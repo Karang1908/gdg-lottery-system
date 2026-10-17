@@ -11,3 +11,9 @@ test('walk lists all assets in public directory', () => {
   assert.ok(files.some((f) => f.endsWith('index.html')));
   assert.ok(files.some((f) => f.endsWith('admin.html')));
 });
+
+test('hashName generates 8-character sha256 content hashes', () => {
+  const content = Buffer.from('console.log("hello");');
+  const hashed = hashName('app.js', content);
+  assert.match(hashed, /^app\.[0-9a-f]{8}\.js$/);
+});
