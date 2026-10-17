@@ -123,6 +123,9 @@
     return days ? `${days}d ${clock}` : clock;
   }
 
+  /**
+   * Calculates countdown clock text from active state.
+   */
   function updateCountdown() {
     if (!state?.countdownEndsAt) {
       countdown.textContent = 'Not scheduled';
