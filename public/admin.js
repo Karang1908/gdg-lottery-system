@@ -331,6 +331,7 @@
 
   // Binds operator draw button triggering random entrant selection.
   drawButton.addEventListener('click', drawWinner);
+  // Clears active winner and opens stage for subsequent draw.
   advanceButton.addEventListener('click', () => runAndRender('advance'));
   returnButton.addEventListener('click', () =>
     runAndRender('return', 'The winner is eligible again.')
