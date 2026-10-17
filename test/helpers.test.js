@@ -74,3 +74,18 @@ test('getEligibleCount returns 0 for empty state', () => {
   assert.equal(count(null), 0);
   assert.equal(count({ entries: [] }), 0);
 });
+
+test('getEligibleCount counts unselected entries correctly', () => {
+  const count = (state) => {
+    if (!state || !Array.isArray(state.entries)) return 0;
+    return state.entries.reduce((c, e) => c + (e && !e.selectedAt ? 1 : 0), 0);
+  };
+  const state = {
+    entries: [
+      { id: '1', selectedAt: null },
+      { id: '2', selectedAt: null },
+      { id: '3', selectedAt: null },
+    ],
+  };
+  assert.equal(count(state), 3);
+});
