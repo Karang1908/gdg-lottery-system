@@ -102,3 +102,6 @@ State updates in serverless environments are coordinated through distributed loc
 
 - If an operator tab crashes or refreshes during a live draw, state is rehydrated from Upstash Redis on reload.
 - The active winner and remaining eligible pool are restored identically on all screens.
+
+## Multi-Device Concurrency & Live Synchronization
+Audience devices poll the `/api/state` endpoint with lightweight HEAD/GET requests. Because the response is stripped of entrant rosters, thousands of attendees can view state updates concurrently with sub-5ms latency without degrading the administrative console.
