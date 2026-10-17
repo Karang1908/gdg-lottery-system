@@ -65,3 +65,12 @@ test('isValidUUID rejects non-string values', () => {
   assert.equal(check(undefined), false);
   assert.equal(check(9999), false);
 });
+
+test('getEligibleCount returns 0 for empty state', () => {
+  const count = (state) => {
+    if (!state || !Array.isArray(state.entries)) return 0;
+    return state.entries.reduce((c, e) => c + (e && !e.selectedAt ? 1 : 0), 0);
+  };
+  assert.equal(count(null), 0);
+  assert.equal(count({ entries: [] }), 0);
+});
