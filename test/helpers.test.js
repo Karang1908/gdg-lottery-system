@@ -46,3 +46,9 @@ test('maskEmail handles invalid or non-string inputs safely', () => {
   assert.equal(mask(undefined), '');
   assert.equal(mask(12345), '');
 });
+
+test('isValidUUID recognizes standard UUID v4 strings', () => {
+  const check = (id) => typeof id === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id);
+  assert.equal(check('c9e656d7-8bc8-4399-bfb7-2dc0fead52b2'), true);
+  assert.equal(check('00000000-0000-4000-8000-000000000000'), true);
+});
