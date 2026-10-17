@@ -52,3 +52,9 @@ test('isValidUUID recognizes standard UUID v4 strings', () => {
   assert.equal(check('c9e656d7-8bc8-4399-bfb7-2dc0fead52b2'), true);
   assert.equal(check('00000000-0000-4000-8000-000000000000'), true);
 });
+
+test('isValidUUID rejects malformed or truncated UUIDs', () => {
+  const check = (id) => typeof id === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id);
+  assert.equal(check('c9e656d7-8bc8-4399-bfb7'), false);
+  assert.equal(check('not-a-valid-uuid-at-all'), false);
+});
